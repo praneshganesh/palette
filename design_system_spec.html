@@ -1,0 +1,200 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.shell{background:#0e0e11;border-radius:16px;padding:0;overflow:hidden;border:0.5px solid rgba(255,255,255,0.08)}
+.topbar{background:#0e0e11;border-bottom:0.5px solid rgba(255,255,255,0.08);padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:15px;font-weight:500;color:#fff;letter-spacing:-0.3px}
+.progress-wrap{display:flex;align-items:center;gap:8px}
+.step-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s}
+.step-dot.active{background:#a78bfa;width:18px;border-radius:3px}
+.step-dot.done{background:rgba(167,139,250,0.4)}
+.step-num{font-size:12px;color:rgba(255,255,255,0.3);margin-left:8px}
+.content{padding:48px 40px 40px}
+.q-label{font-size:11px;font-weight:500;color:rgba(167,139,250,0.7);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px}
+.q-title{font-size:28px;font-weight:500;color:#fff;letter-spacing:-0.5px;line-height:1.2;margin-bottom:8px}
+.q-sub{font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:36px;line-height:1.6}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:32px}
+.opt{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;cursor:pointer;transition:all 0.2s;user-select:none}
+.opt:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.2)}
+.opt.selected{background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.6)}
+.opt-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);margin-bottom:12px;display:flex;align-items:center;justify-content:center}
+.opt-icon svg{width:16px;height:16px;stroke:rgba(255,255,255,0.5)}
+.opt.selected .opt-icon{background:rgba(167,139,250,0.2)}
+.opt.selected .opt-icon svg{stroke:#a78bfa}
+.opt-title{font-size:13px;font-weight:500;color:rgba(255,255,255,0.85);margin-bottom:4px}
+.opt-desc{font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5}
+.opt.selected .opt-title{color:#fff}
+.actions{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:0.5px solid rgba(255,255,255,0.06)}
+.btn-back{background:transparent;border:0.5px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);font-size:13px;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:var(--font-sans);transition:all 0.2s}
+.btn-back:hover{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.7)}
+.btn-next{background:#a78bfa;border:none;color:#1a0a3d;font-size:13px;font-weight:500;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:var(--font-sans);display:flex;align-items:center;gap:6px;transition:all 0.2s}
+.btn-next:hover{background:#b99ff8}
+.btn-next:active{transform:scale(0.98)}
+.skip{font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer;padding:10px 0}
+.skip:hover{color:rgba(255,255,255,0.5)}
+.section-divider{margin:40px 0 32px;border-top:0.5px solid rgba(255,255,255,0.06);padding-top:40px}
+.spec-label{font-size:11px;font-weight:500;color:rgba(255,255,255,0.25);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px}
+.token-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.token-swatch{width:32px;height:32px;border-radius:6px;flex-shrink:0}
+.token-name{font-size:12px;color:rgba(255,255,255,0.5);font-family:var(--font-mono);min-width:160px}
+.token-val{font-size:12px;color:rgba(255,255,255,0.25);font-family:var(--font-mono)}
+.comp-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:99px}
+.badge-purple{background:rgba(167,139,250,0.15);color:#a78bfa}
+.badge-green{background:rgba(52,211,153,0.12);color:#34d399}
+.badge-amber{background:rgba(251,191,36,0.12);color:#fbbf24}
+.badge-red{background:rgba(248,113,113,0.12);color:#f87171}
+.input-demo{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-size:13px;color:rgba(255,255,255,0.6);font-family:var(--font-sans);width:200px}
+.card-demo{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 20px}
+.card-demo-title{font-size:13px;font-weight:500;color:#fff;margin-bottom:4px}
+.card-demo-sub{font-size:12px;color:rgba(255,255,255,0.4)}
+.type-scale div{margin-bottom:8px;color:#fff}
+.pill-toggle{display:flex;background:rgba(255,255,255,0.05);border-radius:8px;padding:3px;gap:2px;width:fit-content}
+.pill-opt{font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;color:rgba(255,255,255,0.4);transition:all 0.2s}
+.pill-opt.active{background:rgba(255,255,255,0.1);color:#fff}
+</style>
+
+<h2 class="sr-only">Interactive design system mockup for the AI design system generator onboarding flow</h2>
+
+<div class="shell">
+  <div class="topbar">
+    <span class="logo">Palett</span>
+    <div class="progress-wrap">
+      <div class="step-dot done" id="d1"></div>
+      <div class="step-dot active" id="d2"></div>
+      <div class="step-dot" id="d3"></div>
+      <div class="step-dot" id="d4"></div>
+      <div class="step-dot" id="d5"></div>
+      <div class="step-dot" id="d6"></div>
+      <span class="step-num" id="step-num">Step 2 of 6</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="q-label">Visual identity</div>
+    <div class="q-title">Which style feels closest to your brand?</div>
+    <div class="q-sub">Choose one — this shapes your typography, spacing, and component personality.</div>
+
+    <div class="opt-grid" id="opt-grid">
+      <div class="opt" onclick="select(this)">
+        <div class="opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="opt-title">Professional</div>
+        <div class="opt-desc">Corporate, structured, trustworthy</div>
+      </div>
+      <div class="opt selected" onclick="select(this)">
+        <div class="opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></div>
+        <div class="opt-title">Premium</div>
+        <div class="opt-desc">Elegant, refined, high-trust</div>
+      </div>
+      <div class="opt" onclick="select(this)">
+        <div class="opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="opt-title">Modern</div>
+        <div class="opt-desc">Startup feel, fast, clean</div>
+      </div>
+      <div class="opt" onclick="select(this)">
+        <div class="opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="opt-title">Friendly</div>
+        <div class="opt-desc">Approachable, warm, human</div>
+      </div>
+      <div class="opt" onclick="select(this)">
+        <div class="opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h6"/></svg></div>
+        <div class="opt-title">Minimal</div>
+        <div class="opt-desc">Clean, quiet, content-first</div>
+      </div>
+      <div class="opt" onclick="select(this)">
+        <div class="opt-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="opt-title">Bold</div>
+        <div class="opt-desc">High contrast, strong presence</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div style="display:flex;align-items:center;gap:16px">
+        <button class="btn-back">Back</button>
+        <span class="skip">Skip this step</span>
+      </div>
+      <button class="btn-next">Continue <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+
+    <div class="section-divider">
+      <div class="spec-label">Component tokens</div>
+      <div class="token-row"><div class="token-swatch" style="background:#a78bfa"></div><span class="token-name">--color-accent</span><span class="token-val">#a78bfa</span></div>
+      <div class="token-row"><div class="token-swatch" style="background:#0e0e11;border:0.5px solid rgba(255,255,255,0.15)"></div><span class="token-name">--color-surface</span><span class="token-val">#0e0e11</span></div>
+      <div class="token-row"><div class="token-swatch" style="background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1)"></div><span class="token-name">--color-card</span><span class="token-val">rgba(255,255,255,0.04)</span></div>
+      <div class="token-row"><div class="token-swatch" style="background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.15)"></div><span class="token-name">--color-border</span><span class="token-val">rgba(255,255,255,0.10)</span></div>
+    </div>
+
+    <div class="section-divider" style="margin-top:0">
+      <div class="spec-label">Buttons</div>
+      <div class="comp-row">
+        <button class="btn-next" style="pointer-events:none">Primary action</button>
+        <button class="btn-back" style="pointer-events:none">Secondary</button>
+        <button style="background:transparent;border:none;color:rgba(255,255,255,0.4);font-size:13px;font-family:var(--font-sans);cursor:default;padding:10px 0">Ghost / skip</button>
+      </div>
+
+      <div class="spec-label" style="margin-top:24px">Selections</div>
+      <div class="comp-row">
+        <div class="opt" style="width:140px;pointer-events:none"><div class="opt-title">Default</div><div class="opt-desc">Unselected state</div></div>
+        <div class="opt selected" style="width:140px;pointer-events:none"><div class="opt-title">Selected</div><div class="opt-desc">Active state</div></div>
+      </div>
+
+      <div class="spec-label" style="margin-top:24px">Badges & status</div>
+      <div class="comp-row">
+        <span class="badge badge-purple">In progress</span>
+        <span class="badge badge-green">Complete</span>
+        <span class="badge badge-amber">Draft</span>
+        <span class="badge badge-red">Error</span>
+      </div>
+
+      <div class="spec-label" style="margin-top:24px">Inputs</div>
+      <div class="comp-row">
+        <input class="input-demo" placeholder="Type something..." style="outline:none" />
+        <div class="pill-toggle">
+          <div class="pill-opt active">English</div>
+          <div class="pill-opt">عربي</div>
+          <div class="pill-opt">Both</div>
+        </div>
+      </div>
+
+      <div class="spec-label" style="margin-top:24px">Cards</div>
+      <div class="comp-row" style="align-items:stretch">
+        <div class="card-demo" style="flex:1">
+          <div class="card-demo-title">Government portal</div>
+          <div class="card-demo-sub">Healthcare · Arabic + English</div>
+        </div>
+        <div class="card-demo" style="flex:1;border-color:rgba(167,139,250,0.4)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <div class="card-demo-title">Internal dashboard</div>
+              <div class="card-demo-sub">Operations · English only</div>
+            </div>
+            <span class="badge badge-purple" style="flex-shrink:0">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-label" style="margin-top:24px">Type scale</div>
+      <div class="type-scale">
+        <div style="font-size:28px;font-weight:500;letter-spacing:-0.5px">Heading — 28px / 500</div>
+        <div style="font-size:18px;font-weight:500;letter-spacing:-0.3px;color:rgba(255,255,255,0.8)">Section title — 18px / 500</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.6)">Body text — 14px / 400, line-height 1.6</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.35)">Caption / label — 12px / 400</div>
+        <div style="font-size:11px;color:rgba(167,139,250,0.7);letter-spacing:0.1em;text-transform:uppercase;font-weight:500">Section label — 11px / 500 uppercase</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function select(el){
+  el.closest('.opt-grid').querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+document.querySelector('.pill-toggle').addEventListener('click',e=>{
+  const t=e.target.closest('.pill-opt');
+  if(!t)return;
+  t.closest('.pill-toggle').querySelectorAll('.pill-opt').forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');
+});
+</script>
