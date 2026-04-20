@@ -852,6 +852,87 @@ function MobileNavRule({
   );
 }
 
+function ResponsiveBreakpointRule({
+  palette,
+  system,
+}: {
+  palette: DesignSystem["palette"];
+  system: DesignSystem;
+}) {
+  const breakpoints = [
+    { label: "Mobile", range: "0 – 639 px", icon: "📱", layout: "Single column, bottom nav, stacked cards", width: 40 },
+    { label: "Tablet", range: "640 – 1023 px", icon: "📲", layout: "Collapsed sidebar, 2-col grid, compact header", width: 65 },
+    { label: "Desktop", range: "1024 – 1439 px", icon: "🖥", layout: "Full sidebar, 3-col grid, expanded header", width: 85 },
+    { label: "Wide", range: "≥ 1440 px", icon: "🖥", layout: "Max-width container, centered, 4-col grid", width: 100 },
+  ];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      {breakpoints.map((bp) => (
+        <div key={bp.label} style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ width: 80, flexShrink: 0 }}>
+            <p style={{ fontSize: 12, fontWeight: 700, color: palette.textPrimary, margin: 0, fontFamily: system.typography.headingFont }}>{bp.label}</p>
+            <p style={{ fontSize: 10, color: palette.textSecondary, margin: 0, fontFamily: "monospace" }}>{bp.range}</p>
+          </div>
+          <div style={{ flex: 1, position: "relative", height: 36 }}>
+            <div style={{ position: "absolute", inset: 0, backgroundColor: palette.surfaceMuted, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.border}` }} />
+            <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: `${bp.width}%`, backgroundColor: palette.primary + "20", borderRadius: system.spacing.radius.md, borderRight: `2px solid ${palette.primary}` }} />
+            <div style={{ position: "absolute", top: "50%", left: 12, transform: "translateY(-50%)", fontSize: 11, color: palette.textSecondary, whiteSpace: "nowrap", fontFamily: system.typography.bodyFont }}>{bp.layout}</div>
+          </div>
+        </div>
+      ))}
+      <div style={{ padding: 16, backgroundColor: palette.surfaceMuted, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.border}`, marginTop: 8 }}>
+        <p style={{ fontSize: 11, color: palette.textSecondary, margin: 0, lineHeight: 1.6 }}>
+          <strong style={{ color: palette.textPrimary }}>Touch targets:</strong> min 44×44 px on mobile.{" "}
+          <strong style={{ color: palette.textPrimary }}>Tap spacing:</strong> ≥8 px between interactive elements.{" "}
+          <strong style={{ color: palette.textPrimary }}>Font scaling:</strong> body ≥14 px on mobile, headings scale down 15–20%.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TouchTargetRule({
+  palette,
+  system,
+}: {
+  palette: DesignSystem["palette"];
+  system: DesignSystem;
+}) {
+  return (
+    <div style={{ display: "flex", gap: 24 }}>
+      <div style={{ flex: 1, backgroundColor: palette.surfaceMuted, borderRadius: system.spacing.radius.lg, border: `1px solid ${palette.border}`, padding: 24 }}>
+        <p style={{ fontSize: 10, fontWeight: 700, color: palette.success, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>Correct</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {["Save", "Cancel", "Delete"].map((label) => (
+            <div key={label} style={{ height: 44, backgroundColor: label === "Save" ? palette.primary : palette.surface, border: `1px solid ${label === "Save" ? palette.primary : palette.border}`, borderRadius: system.spacing.radius.md, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 600, color: label === "Save" ? "#fff" : palette.textPrimary, fontFamily: system.typography.bodyFont }}>{label}</div>
+          ))}
+        </div>
+        <p style={{ fontSize: 11, color: palette.textSecondary, margin: "12px 0 0", textAlign: "center" }}>44px height — comfortable tap</p>
+      </div>
+      <div style={{ flex: 1, backgroundColor: palette.surfaceMuted, borderRadius: system.spacing.radius.lg, border: `1px solid ${palette.border}`, padding: 24 }}>
+        <p style={{ fontSize: 10, fontWeight: 700, color: palette.danger, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>Avoid</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {["Save", "Cancel", "Delete"].map((label) => (
+            <div key={label} style={{ height: 28, backgroundColor: label === "Save" ? palette.primary : palette.surface, border: `1px solid ${label === "Save" ? palette.primary : palette.border}`, borderRadius: system.spacing.radius.sm, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 600, color: label === "Save" ? "#fff" : palette.textPrimary, fontFamily: system.typography.bodyFont }}>{label}</div>
+          ))}
+        </div>
+        <p style={{ fontSize: 11, color: palette.danger, margin: "12px 0 0", textAlign: "center" }}>28px height — too small for mobile</p>
+      </div>
+      <div style={{ flex: 1, backgroundColor: palette.surfaceMuted, borderRadius: system.spacing.radius.lg, border: `1px solid ${palette.border}`, padding: 24 }}>
+        <p style={{ fontSize: 10, fontWeight: 700, color: palette.primary, textTransform: "uppercase", letterSpacing: "1px", margin: "0 0 12px" }}>Spacing Rules</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {[{ label: "Min tap target", value: "44 × 44 px" }, { label: "Min gap between targets", value: "8 px" }, { label: "Icon button min size", value: "40 × 40 px" }, { label: "Input field height", value: "48 px (mobile)" }, { label: "List item height", value: "56 px (mobile)" }].map((rule) => (
+            <div key={rule.label} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: 12, color: palette.textPrimary, fontFamily: system.typography.bodyFont }}>{rule.label}</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: palette.primary, fontFamily: "monospace", backgroundColor: palette.primary + "10", padding: "2px 8px", borderRadius: system.spacing.radius.sm }}>{rule.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function DesktopLayoutRule({
   palette,
   system,
@@ -2316,6 +2397,253 @@ function TemplateMobilePreview({
   );
 }
 
+function TemplateMobileFormPage({
+  palette,
+  system,
+  content,
+}: {
+  palette: DesignSystem["palette"];
+  system: DesignSystem;
+  content: IndustryContent;
+}) {
+  const phoneWidth = 250;
+  const phoneHeight = Math.round(phoneWidth * (667 / 375));
+  return (
+    <div style={{ borderRadius: system.spacing.radius.lg, border: `1px solid ${palette.border}`, overflow: "hidden", backgroundColor: palette.surfaceMuted }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+        <div style={{ width: phoneWidth, height: phoneHeight, borderRadius: 28, border: `3px solid ${palette.border}`, backgroundColor: palette.background, overflow: "hidden", position: "relative", display: "flex", flexDirection: "column", boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}>
+          <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 80, height: 20, backgroundColor: palette.border, borderRadius: "0 0 12px 12px", zIndex: 10 }} />
+          <div style={{ height: 48, backgroundColor: palette.surface, borderBottom: `1px solid ${palette.border}`, display: "flex", alignItems: "center", padding: "0 14px", paddingTop: 8, gap: 10, flexShrink: 0 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={palette.textPrimary} strokeWidth="2" strokeLinecap="round"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            <p style={{ fontSize: 14, fontWeight: 700, color: palette.textPrimary, margin: 0, fontFamily: system.typography.headingFont }}>New Request</p>
+          </div>
+          <div style={{ flex: 1, padding: 12, overflowY: "auto", display: "flex", flexDirection: "column", gap: 12 }}>
+            <div>
+              <p style={{ fontSize: 9, fontWeight: 600, color: palette.textSecondary, margin: "0 0 4px" }}>Full Name</p>
+              <div style={{ height: 36, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.border}`, backgroundColor: palette.surface, padding: "0 10px", display: "flex", alignItems: "center" }}>
+                <span style={{ fontSize: 11, color: palette.textSecondary, opacity: 0.6 }}>Enter your name</span>
+              </div>
+            </div>
+            <div>
+              <p style={{ fontSize: 9, fontWeight: 600, color: palette.textSecondary, margin: "0 0 4px" }}>Email</p>
+              <div style={{ height: 36, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.border}`, backgroundColor: palette.surface, padding: "0 10px", display: "flex", alignItems: "center" }}>
+                <span style={{ fontSize: 11, color: palette.textSecondary, opacity: 0.6 }}>email@example.com</span>
+              </div>
+            </div>
+            <div>
+              <p style={{ fontSize: 9, fontWeight: 600, color: palette.textSecondary, margin: "0 0 4px" }}>Category</p>
+              <div style={{ height: 36, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.border}`, backgroundColor: palette.surface, padding: "0 10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span style={{ fontSize: 11, color: palette.textSecondary, opacity: 0.6 }}>Select…</span>
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke={palette.textSecondary} strokeWidth="1.5" strokeLinecap="round" /></svg>
+              </div>
+            </div>
+            <div>
+              <p style={{ fontSize: 9, fontWeight: 600, color: palette.textSecondary, margin: "0 0 4px" }}>Description</p>
+              <div style={{ height: 64, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.border}`, backgroundColor: palette.surface, padding: 10 }}>
+                <span style={{ fontSize: 11, color: palette.textSecondary, opacity: 0.6 }}>Describe your request…</span>
+              </div>
+            </div>
+            <div>
+              <p style={{ fontSize: 9, fontWeight: 600, color: palette.textSecondary, margin: "0 0 4px" }}>Attachment</p>
+              <div style={{ height: 48, borderRadius: system.spacing.radius.md, border: `1px dashed ${palette.border}`, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={palette.textSecondary} strokeWidth="2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+                <span style={{ fontSize: 10, color: palette.textSecondary }}>Upload file</span>
+              </div>
+            </div>
+          </div>
+          <div style={{ padding: "10px 12px", borderTop: `1px solid ${palette.border}`, backgroundColor: palette.surface, flexShrink: 0 }}>
+            <div style={{ height: 36, borderRadius: system.spacing.radius.md, backgroundColor: palette.primary, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: 12, fontWeight: 600, color: "#fff", fontFamily: system.typography.bodyFont }}>Submit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TemplateMobileListPage({
+  palette,
+  system,
+  content,
+}: {
+  palette: DesignSystem["palette"];
+  system: DesignSystem;
+  content: IndustryContent;
+}) {
+  const phoneWidth = 250;
+  const phoneHeight = Math.round(phoneWidth * (667 / 375));
+  const items = content.recentItems.slice(0, 5);
+  return (
+    <div style={{ borderRadius: system.spacing.radius.lg, border: `1px solid ${palette.border}`, overflow: "hidden", backgroundColor: palette.surfaceMuted }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+        <div style={{ width: phoneWidth, height: phoneHeight, borderRadius: 28, border: `3px solid ${palette.border}`, backgroundColor: palette.background, overflow: "hidden", position: "relative", display: "flex", flexDirection: "column", boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}>
+          <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 80, height: 20, backgroundColor: palette.border, borderRadius: "0 0 12px 12px", zIndex: 10 }} />
+          <div style={{ height: 48, backgroundColor: palette.surface, borderBottom: `1px solid ${palette.border}`, display: "flex", alignItems: "center", padding: "0 14px", paddingTop: 8, justifyContent: "space-between", flexShrink: 0 }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: palette.textPrimary, margin: 0, fontFamily: system.typography.headingFont }}>{content.sidebarSections[0]?.label || "Items"}</p>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={palette.primary} strokeWidth="2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+          </div>
+          <div style={{ padding: "8px 12px", borderBottom: `1px solid ${palette.border}`, backgroundColor: palette.surface, flexShrink: 0 }}>
+            <div style={{ height: 32, borderRadius: system.spacing.radius.md, backgroundColor: palette.surfaceMuted, border: `1px solid ${palette.border}`, display: "flex", alignItems: "center", padding: "0 10px", gap: 6 }}>
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke={palette.textSecondary} strokeWidth="1.2" /><path d="M10.5 10.5L13.5 13.5" stroke={palette.textSecondary} strokeWidth="1.2" strokeLinecap="round" /></svg>
+              <span style={{ fontSize: 10, color: palette.textSecondary, opacity: 0.6 }}>Search…</span>
+            </div>
+          </div>
+          <div style={{ flex: 1, overflowY: "auto" }}>
+            {items.map((item, idx) => (
+              <div key={idx} style={{ padding: "10px 14px", borderBottom: `1px solid ${palette.border}`, display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{ width: 36, height: 36, borderRadius: system.spacing.radius.md, backgroundColor: palette.primary + "15", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: palette.primary }}>{item.title.charAt(0)}</span>
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: 12, fontWeight: 600, color: palette.textPrimary, margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.title}</p>
+                  <p style={{ fontSize: 9, color: palette.textSecondary, margin: 0 }}>{item.author}</p>
+                </div>
+                <span style={{ fontSize: 8, fontWeight: 600, padding: "2px 6px", borderRadius: 9999, backgroundColor: idx === 0 ? palette.success + "20" : idx === 1 ? palette.warning + "20" : palette.surfaceMuted, color: idx === 0 ? palette.success : idx === 1 ? palette.warning : palette.textSecondary }}>{item.status}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ height: 44, backgroundColor: palette.surface, borderTop: `1px solid ${palette.border}`, display: "flex", alignItems: "center", justifyContent: "space-around", padding: "0 8px", flexShrink: 0 }}>
+            {[true, false, false, false].map((active, i) => (
+              <div key={i} style={{ width: 18, height: 18, borderRadius: 4, backgroundColor: active ? palette.primary : palette.border, opacity: active ? 1 : 0.4 }} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TemplateMobileDetailPage({
+  palette,
+  system,
+  content,
+}: {
+  palette: DesignSystem["palette"];
+  system: DesignSystem;
+  content: IndustryContent;
+}) {
+  const phoneWidth = 250;
+  const phoneHeight = Math.round(phoneWidth * (667 / 375));
+  return (
+    <div style={{ borderRadius: system.spacing.radius.lg, border: `1px solid ${palette.border}`, overflow: "hidden", backgroundColor: palette.surfaceMuted }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+        <div style={{ width: phoneWidth, height: phoneHeight, borderRadius: 28, border: `3px solid ${palette.border}`, backgroundColor: palette.background, overflow: "hidden", position: "relative", display: "flex", flexDirection: "column", boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}>
+          <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 80, height: 20, backgroundColor: palette.border, borderRadius: "0 0 12px 12px", zIndex: 10 }} />
+          <div style={{ height: 48, backgroundColor: palette.surface, borderBottom: `1px solid ${palette.border}`, display: "flex", alignItems: "center", padding: "0 14px", paddingTop: 8, gap: 10, flexShrink: 0 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={palette.textPrimary} strokeWidth="2" strokeLinecap="round"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            <p style={{ fontSize: 14, fontWeight: 700, color: palette.textPrimary, margin: 0, flex: 1, fontFamily: system.typography.headingFont }}>Details</p>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={palette.textSecondary} strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg>
+          </div>
+          <div style={{ flex: 1, overflowY: "auto", padding: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+              <div style={{ width: 44, height: 44, borderRadius: "50%", backgroundColor: palette.primary + "15", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ fontSize: 18, fontWeight: 700, color: palette.primary }}>{content.orgName.charAt(0)}</span>
+              </div>
+              <div>
+                <p style={{ fontSize: 14, fontWeight: 700, color: palette.textPrimary, margin: 0, fontFamily: system.typography.headingFont }}>{content.recentItems[0]?.title || "Item Name"}</p>
+                <span style={{ fontSize: 9, fontWeight: 600, padding: "1px 6px", borderRadius: 9999, backgroundColor: palette.success + "20", color: palette.success }}>{content.recentItems[0]?.status || "Active"}</span>
+              </div>
+            </div>
+            {[{ label: "Category", value: content.formFields.categories[0] || "General" }, { label: "Created", value: "2 days ago" }, { label: "Priority", value: "High" }, { label: "Assigned to", value: "Ahmed K." }].map((row) => (
+              <div key={row.label} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: `1px solid ${palette.border}` }}>
+                <span style={{ fontSize: 11, color: palette.textSecondary }}>{row.label}</span>
+                <span style={{ fontSize: 11, fontWeight: 600, color: palette.textPrimary }}>{row.value}</span>
+              </div>
+            ))}
+            <div style={{ marginTop: 14 }}>
+              <p style={{ fontSize: 10, fontWeight: 600, color: palette.textSecondary, margin: "0 0 6px", textTransform: "uppercase", letterSpacing: "0.05em" }}>Timeline</p>
+              {["Created", "Assigned", "In Progress"].map((step, i) => (
+                <div key={step} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                    <div style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: i === 2 ? palette.primary : palette.success, flexShrink: 0 }} />
+                    {i < 2 && <div style={{ width: 1, height: 16, backgroundColor: palette.border }} />}
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 10, fontWeight: 600, color: palette.textPrimary, margin: 0 }}>{step}</p>
+                    <p style={{ fontSize: 8, color: palette.textSecondary, margin: 0 }}>Apr {15 - i}, 2026</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ padding: "8px 12px", borderTop: `1px solid ${palette.border}`, backgroundColor: palette.surface, display: "flex", gap: 8, flexShrink: 0 }}>
+            <div style={{ flex: 1, height: 36, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.border}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: 11, fontWeight: 600, color: palette.textPrimary }}>Edit</span>
+            </div>
+            <div style={{ flex: 1, height: 36, borderRadius: system.spacing.radius.md, backgroundColor: palette.primary, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: 11, fontWeight: 600, color: "#fff" }}>Approve</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TemplateMobileSettingsPage({
+  palette,
+  system,
+}: {
+  palette: DesignSystem["palette"];
+  system: DesignSystem;
+}) {
+  const phoneWidth = 250;
+  const phoneHeight = Math.round(phoneWidth * (667 / 375));
+  const settingsGroups: { label: string; items: { name: string; icon: string; hasArrow?: boolean; value?: string; toggle?: boolean }[] }[] = [
+    { label: "ACCOUNT", items: [
+      { name: "Profile", icon: "👤", hasArrow: true },
+      { name: "Notifications", icon: "🔔", hasArrow: true },
+      { name: "Language", icon: "🌐", value: "EN" },
+    ]},
+    { label: "PREFERENCES", items: [
+      { name: "Dark Mode", icon: "🌙", toggle: false },
+      { name: "Biometrics", icon: "🔒", toggle: true },
+    ]},
+    { label: "SUPPORT", items: [
+      { name: "Help Center", icon: "❓", hasArrow: true },
+      { name: "Report Issue", icon: "🐛", hasArrow: true },
+    ]},
+  ];
+  return (
+    <div style={{ borderRadius: system.spacing.radius.lg, border: `1px solid ${palette.border}`, overflow: "hidden", backgroundColor: palette.surfaceMuted }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+        <div style={{ width: phoneWidth, height: phoneHeight, borderRadius: 28, border: `3px solid ${palette.border}`, backgroundColor: palette.background, overflow: "hidden", position: "relative", display: "flex", flexDirection: "column", boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}>
+          <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 80, height: 20, backgroundColor: palette.border, borderRadius: "0 0 12px 12px", zIndex: 10 }} />
+          <div style={{ height: 48, backgroundColor: palette.surface, borderBottom: `1px solid ${palette.border}`, display: "flex", alignItems: "center", justifyContent: "center", paddingTop: 8, flexShrink: 0 }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: palette.textPrimary, margin: 0, fontFamily: system.typography.headingFont }}>Settings</p>
+          </div>
+          <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }}>
+            {settingsGroups.map((group) => (
+              <div key={group.label}>
+                <p style={{ fontSize: 9, fontWeight: 700, color: palette.textSecondary, textTransform: "uppercase", letterSpacing: "0.08em", padding: "10px 14px 4px", margin: 0 }}>{group.label}</p>
+                {group.items.map((item) => (
+                  <div key={item.name} style={{ display: "flex", alignItems: "center", padding: "10px 14px", gap: 10, borderBottom: `1px solid ${palette.border}` }}>
+                    <span style={{ fontSize: 14 }}>{item.icon}</span>
+                    <span style={{ fontSize: 12, color: palette.textPrimary, flex: 1, fontFamily: system.typography.bodyFont }}>{item.name}</span>
+                    {item.hasArrow && <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M6 4L10 8L6 12" stroke={palette.textSecondary} strokeWidth="1.5" strokeLinecap="round" /></svg>}
+                    {item.value && <span style={{ fontSize: 10, color: palette.textSecondary, fontFamily: "monospace" }}>{item.value}</span>}
+                    {item.toggle !== undefined && (
+                      <div style={{ width: 36, height: 20, borderRadius: 10, backgroundColor: item.toggle ? palette.primary : palette.border, position: "relative" }}>
+                        <div style={{ width: 16, height: 16, borderRadius: "50%", backgroundColor: "#fff", position: "absolute", top: 2, ...(item.toggle ? { right: 2 } : { left: 2 }), boxShadow: "0 1px 2px rgba(0,0,0,0.2)" }} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+            <div style={{ padding: "16px 14px" }}>
+              <div style={{ height: 36, borderRadius: system.spacing.radius.md, border: `1px solid ${palette.danger}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ fontSize: 12, fontWeight: 600, color: palette.danger }}>Sign Out</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─────────────────────────────────────────────
    MAIN EXPORT
    ───────────────────────────────────────────── */
@@ -2389,6 +2717,16 @@ export function AppShellTab({ system, content }: AppShellTabProps) {
       render: () => <MobileNavRule palette={palette} system={system} content={content} />,
     },
     {
+      title: "RESPONSIVE BREAKPOINTS",
+      desc: "Breakpoint thresholds and layout behavior at each viewport size.",
+      render: () => <ResponsiveBreakpointRule palette={palette} system={system} />,
+    },
+    {
+      title: "TOUCH TARGETS & MOBILE SIZING",
+      desc: "Minimum tap target sizes, spacing rules, and input sizing for touch interfaces.",
+      render: () => <TouchTargetRule palette={palette} system={system} />,
+    },
+    {
       title: "DESKTOP LAYOUT DEFAULTS",
       desc: "Default sidebar-to-content ratio and maximum content widths for desktop.",
       render: () => <DesktopLayoutRule palette={palette} system={system} />,
@@ -2431,14 +2769,34 @@ export function AppShellTab({ system, content }: AppShellTabProps) {
       render: () => <TemplateRequestFlow palette={palette} system={system} content={content} />,
     },
     {
-      title: "MOBILE PREVIEW",
+      title: "MOBILE DASHBOARD",
       desc: "Phone-frame preview showing the app's mobile viewport with compact dashboard and bottom tabs.",
       render: () => <TemplateMobilePreview palette={palette} system={system} content={content} />,
     },
+    {
+      title: "MOBILE FORM",
+      desc: "Single-column stacked form with sticky submit button in a phone-sized viewport.",
+      render: () => <TemplateMobileFormPage palette={palette} system={system} content={content} />,
+    },
+    {
+      title: "MOBILE LIST",
+      desc: "Searchable list view with avatar initials, status badges, and swipe-hint rows on mobile.",
+      render: () => <TemplateMobileListPage palette={palette} system={system} content={content} />,
+    },
+    {
+      title: "MOBILE DETAIL",
+      desc: "Detail view with back navigation, key-value metadata, timeline, and sticky action buttons.",
+      render: () => <TemplateMobileDetailPage palette={palette} system={system} content={content} />,
+    },
+    {
+      title: "MOBILE SETTINGS",
+      desc: "Grouped settings list with toggles, navigation arrows, and sign-out action.",
+      render: () => <TemplateMobileSettingsPage palette={palette} system={system} />,
+    },
   ];
 
-  const shellRuleIds = ["shell-sidebar-style", "shell-header-style", "shell-page-title", "shell-filter-bar", "shell-dashboard", "shell-form-layout", "shell-mobile-nav", "shell-desktop"];
-  const templateIds = ["tmpl-dashboard", "tmpl-form", "tmpl-list", "tmpl-detail", "tmpl-settings", "tmpl-request", "tmpl-mobile"];
+  const shellRuleIds = ["shell-sidebar-style", "shell-header-style", "shell-page-title", "shell-filter-bar", "shell-dashboard", "shell-form-layout", "shell-mobile-nav", "shell-breakpoints", "shell-touch-targets", "shell-desktop"];
+  const templateIds = ["tmpl-dashboard", "tmpl-form", "tmpl-list", "tmpl-detail", "tmpl-settings", "tmpl-request", "tmpl-mobile-dash", "tmpl-mobile-form", "tmpl-mobile-list", "tmpl-mobile-detail", "tmpl-mobile-settings"];
 
   const shellNavItems = [
     { id: "shell-sidebar-style", label: "Sidebar Style" },
@@ -2448,6 +2806,8 @@ export function AppShellTab({ system, content }: AppShellTabProps) {
     { id: "shell-dashboard", label: "Dashboard Widget" },
     { id: "shell-form-layout", label: "Form Layout Rules" },
     { id: "shell-mobile-nav", label: "Mobile Navigation" },
+    { id: "shell-breakpoints", label: "Responsive Breakpoints" },
+    { id: "shell-touch-targets", label: "Touch Targets" },
     { id: "shell-desktop", label: "Desktop Defaults" },
   ];
 
@@ -2459,7 +2819,11 @@ export function AppShellTab({ system, content }: AppShellTabProps) {
     { id: "tmpl-detail", label: "Detail Page" },
     { id: "tmpl-settings", label: "Settings Page" },
     { id: "tmpl-request", label: "Request Flow" },
-    { id: "tmpl-mobile", label: "Mobile Preview" },
+    { id: "tmpl-mobile-dash", label: "Mobile Dashboard" },
+    { id: "tmpl-mobile-form", label: "Mobile Form" },
+    { id: "tmpl-mobile-list", label: "Mobile List" },
+    { id: "tmpl-mobile-detail", label: "Mobile Detail" },
+    { id: "tmpl-mobile-settings", label: "Mobile Settings" },
   ];
 
   const [activeSection, setActiveSection] = useState<string>("");

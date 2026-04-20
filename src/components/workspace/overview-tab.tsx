@@ -5,17 +5,6 @@ import { motion } from "framer-motion";
 import type { DesignSystem, PaletteTokenSet } from "@/types";
 import { useDesignSystemStore } from "@/store/design-system";
 import { useOnboardingStore } from "@/store/onboarding";
-import { getInformationArchitecture } from "@/lib/information-architecture";
-import {
-  Icon3dDashboard, Icon3dBuilding, Icon3dUsers, Icon3dCalendar, Icon3dFolder,
-  Icon3dCurrency, Icon3dChart, Icon3dSettings, Icon3dSearch, Icon3dBell,
-  Icon3dTextInput, Icon3dMapPin, Icon3dShoppingCart, Icon3dHospital,
-  Icon3dGraduation, Icon3dLock, Icon3dStar, Icon3dHome, Icon3dMail,
-  Icon3dBriefcase, Icon3dGlobe, Icon3dShield, Icon3dCode, Icon3dLayers,
-  Icon3dGrid, Icon3dHeart, Icon3dWorkflow, Icon3dStore, Icon3dTruck,
-  Icon3dMonitor, Icon3dPeople, Icon3dFactory, Icon3dBank, Icon3dHotel,
-  Icon3dPuzzle, Icon3dSchool, Icon3dGovernment,
-} from "@/components/ui/icons-3d";
 
 interface OverviewTabProps {
   system: DesignSystem;
@@ -71,45 +60,6 @@ const languageLabels: Record<string, string> = {
   "en-ar-plus": "English + Arabic + More",
 };
 
-const screenIconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  dashboard: Icon3dDashboard,
-  building: Icon3dBuilding,
-  users: Icon3dUsers,
-  calendar: Icon3dCalendar,
-  folder: Icon3dFolder,
-  currency: Icon3dCurrency,
-  chart: Icon3dChart,
-  settings: Icon3dSettings,
-  search: Icon3dSearch,
-  bell: Icon3dBell,
-  textInput: Icon3dTextInput,
-  mapPin: Icon3dMapPin,
-  shoppingCart: Icon3dShoppingCart,
-  hospital: Icon3dHospital,
-  graduation: Icon3dGraduation,
-  lock: Icon3dLock,
-  star: Icon3dStar,
-  home: Icon3dHome,
-  mail: Icon3dMail,
-  briefcase: Icon3dBriefcase,
-  globe: Icon3dGlobe,
-  shield: Icon3dShield,
-  code: Icon3dCode,
-  layers: Icon3dLayers,
-  grid: Icon3dGrid,
-  heart: Icon3dHeart,
-  workflow: Icon3dWorkflow,
-  store: Icon3dStore,
-  truck: Icon3dTruck,
-  monitor: Icon3dMonitor,
-  people: Icon3dPeople,
-  factory: Icon3dFactory,
-  bank: Icon3dBank,
-  hotel: Icon3dHotel,
-  puzzle: Icon3dPuzzle,
-  school: Icon3dSchool,
-  government: Icon3dGovernment,
-};
 
 function textColorForBg(hex: string): string {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -293,7 +243,6 @@ export function OverviewTab({ system }: OverviewTabProps) {
     { id: "ov-typography", label: "Typography" },
     { id: "ov-spacing", label: "Spacing & Shape" },
     { id: "ov-localization", label: "Localization" },
-    { id: "ov-ia", label: "Information Architecture" },
   ];
 
   const [activeSection, setActiveSection] = useState<string>("");
@@ -1342,175 +1291,6 @@ export function OverviewTab({ system }: OverviewTabProps) {
         </div>
       </motion.section>
 
-      {/* ── INFORMATION ARCHITECTURE ── */}
-      {(() => {
-        const ia = getInformationArchitecture(system.meta.industry, system.meta.projectType);
-        const priorityColors: Record<string, string> = {
-          core: palette.primary,
-          recommended: palette.info,
-          optional: palette.textSecondary,
-        };
-        return (
-          <>
-            <motion.section id="ov-ia" data-tab-section {...fadeUp} transition={{ delay: 0.7 }} style={{ paddingBottom: 72, marginBottom: 72, borderBottom: `1px solid ${palette.border}` }}>
-              <div style={{ height: 2, width: 48, backgroundColor: palette.primary, marginBottom: 24 }} />
-              <p style={sectionTitleStyle}>Recommended Screens</p>
-              <p style={descriptionStyle}>
-                Based on your industry and project type, these screens form the core information architecture of your application.
-              </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
-                {ia.screens.map((screen) => (
-                  <div
-                    key={screen.name}
-                    style={{
-                      backgroundColor: palette.surface,
-                      border: `1px solid ${palette.border}`,
-                      borderRadius: system.spacing.radius.md,
-                      padding: 20,
-                      borderLeft: `3px solid ${priorityColors[screen.priority]}`,
-                    }}
-                  >
-                    <div className="flex items-center gap-2" style={{ marginBottom: 8 }}>
-                      {(() => { const Ico = screenIconMap[screen.icon]; return Ico ? <Ico size={22} /> : <span style={{ fontSize: 18 }}>{screen.icon}</span>; })()}
-                      <span style={{ fontSize: 14, fontWeight: 600, color: palette.textPrimary }}>{screen.name}</span>
-                    </div>
-                    <p style={{ fontSize: 12, color: palette.textSecondary, lineHeight: 1.5, margin: 0, marginBottom: 8 }}>
-                      {screen.description}
-                    </p>
-                    <span
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 600,
-                        letterSpacing: "1px",
-                        textTransform: "uppercase",
-                        color: priorityColors[screen.priority],
-                        backgroundColor: priorityColors[screen.priority] + "15",
-                        padding: "2px 8px",
-                        borderRadius: system.spacing.radius.full,
-                      }}
-                    >
-                      {screen.priority}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            <motion.section {...fadeUp} transition={{ delay: 0.75 }} style={{ paddingBottom: 72, marginBottom: 72, borderBottom: `1px solid ${palette.border}` }}>
-              <div style={{ height: 2, width: 48, backgroundColor: palette.primary, marginBottom: 24 }} />
-              <p style={sectionTitleStyle}>Key Data Entities</p>
-              <p style={descriptionStyle}>
-                The primary data objects your application will manage, with their key fields.
-              </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                {ia.entities.map((entity) => (
-                  <div
-                    key={entity.name}
-                    style={{
-                      backgroundColor: palette.surface,
-                      border: `1px solid ${palette.border}`,
-                      borderRadius: system.spacing.radius.md,
-                      padding: 24,
-                    }}
-                  >
-                    <p style={{ fontSize: 15, fontWeight: 700, color: palette.textPrimary, margin: 0, marginBottom: 6, fontFamily: system.typography.headingFont }}>
-                      {entity.name}
-                    </p>
-                    <p style={{ fontSize: 12, color: palette.textSecondary, lineHeight: 1.5, margin: 0, marginBottom: 14 }}>
-                      {entity.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {entity.fields.map((field) => (
-                        <span
-                          key={field}
-                          style={{
-                            fontSize: 11,
-                            color: palette.textSecondary,
-                            backgroundColor: palette.surfaceMuted,
-                            border: `1px solid ${palette.border}`,
-                            padding: "3px 10px",
-                            borderRadius: system.spacing.radius.full,
-                            fontFamily: "monospace",
-                          }}
-                        >
-                          {field}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            <motion.section {...fadeUp} transition={{ delay: 0.8 }} style={{ paddingBottom: 72, marginBottom: 72, borderBottom: `1px solid ${palette.border}` }}>
-              <div style={{ height: 2, width: 48, backgroundColor: palette.primary, marginBottom: 24 }} />
-              <p style={sectionTitleStyle}>Navigation Structure</p>
-              <p style={descriptionStyle}>
-                Suggested sidebar navigation organized by functional area.
-              </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
-                {ia.navigation.map((section) => (
-                  <div
-                    key={section.label}
-                    style={{
-                      backgroundColor: palette.surface,
-                      border: `1px solid ${palette.border}`,
-                      borderRadius: system.spacing.radius.md,
-                      padding: 20,
-                    }}
-                  >
-                    <p style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                      color: palette.primary,
-                      margin: 0,
-                      marginBottom: 12,
-                    }}>
-                      {section.label}
-                    </p>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                      {section.items.map((item) => (
-                        <div key={item} className="flex items-center gap-2">
-                          <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: palette.textSecondary, flexShrink: 0 }} />
-                          <span style={{ fontSize: 13, color: palette.textPrimary }}>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            <motion.section {...fadeUp} transition={{ delay: 0.85 }}>
-              <div style={{ height: 2, width: 48, backgroundColor: palette.primary, marginBottom: 24 }} />
-              <p style={sectionTitleStyle}>Recommended Features</p>
-              <p style={descriptionStyle}>
-                Key capabilities and feature areas recommended for your application.
-              </p>
-              <div className="flex flex-wrap" style={{ gap: 10 }}>
-                {ia.features.map((feature) => (
-                  <span
-                    key={feature}
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 500,
-                      color: palette.textPrimary,
-                      backgroundColor: palette.surface,
-                      border: `1px solid ${palette.border}`,
-                      padding: "8px 16px",
-                      borderRadius: system.spacing.radius.md,
-                    }}
-                  >
-                    {feature}
-                  </span>
-                ))}
-              </div>
-            </motion.section>
-          </>
-        );
-      })()}
     </div>
     </div>
     </div>

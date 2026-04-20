@@ -13,6 +13,7 @@ import { ComponentsPart6 } from "./components-tab-part6";
 import { ComponentsPart7 } from "./components-tab-part7";
 import { ComponentsPart8 } from "./components-tab-part8";
 import { ComponentsPart9 } from "./components-tab-part9";
+import { ComponentsPart10 } from "./components-tab-part10";
 
 interface ComponentsTabProps {
   system: DesignSystem;
@@ -136,9 +137,31 @@ const SIDEBAR_SECTIONS = [
     { id: "comp-sign-in", label: "Sign In Form" },
     { id: "comp-profile-card", label: "Profile Card" },
   ]},
+  { group: "Responsive", items: [
+    { id: "comp-responsive-table", label: "Table: Desktop vs Mobile" },
+    { id: "comp-responsive-menu", label: "Nav: Desktop vs Mobile" },
+    { id: "comp-responsive-dropdown", label: "Dropdown: Desktop vs Mobile" },
+    { id: "comp-responsive-grid", label: "Grid: Desktop vs Mobile" },
+    { id: "comp-responsive-modal", label: "Modal: Desktop vs Mobile" },
+    { id: "comp-responsive-form", label: "Form: Desktop vs Mobile" },
+  ]},
   { group: "Mobile", items: [
     { id: "comp-bottom-sheet", label: "Bottom Sheet" },
     { id: "comp-fab", label: "FAB" },
+    { id: "comp-action-sheet", label: "Action Sheet" },
+    { id: "comp-swipe-actions", label: "Swipe Actions" },
+    { id: "comp-pull-refresh", label: "Pull to Refresh" },
+    { id: "comp-mobile-tabs", label: "Mobile Tabs" },
+    { id: "comp-mobile-search", label: "Mobile Search" },
+    { id: "comp-mobile-toast", label: "Mobile Toast" },
+    { id: "comp-floating-header", label: "Floating Header" },
+    { id: "comp-sticky-bottom", label: "Sticky Bottom CTA" },
+    { id: "comp-mobile-stepper", label: "Mobile Stepper" },
+    { id: "comp-swipe-carousel", label: "Swipe Carousel" },
+    { id: "comp-chip-filter", label: "Mobile Chip Filter" },
+    { id: "comp-image-viewer", label: "Image Viewer" },
+    { id: "comp-gesture-hint", label: "Gesture Hints" },
+    { id: "comp-mobile-onboarding", label: "Mobile Onboarding" },
   ]},
 ];
 
@@ -1306,6 +1329,7 @@ export function ComponentsTab({ system, content }: ComponentsTabProps) {
       <ComponentsPart7 system={system} content={content} />
       <ComponentsPart8 system={system} content={content} />
       <ComponentsPart9 system={system} content={content} />
+      <ComponentsPart10 system={system} content={content} />
 
       </div>
     </div>

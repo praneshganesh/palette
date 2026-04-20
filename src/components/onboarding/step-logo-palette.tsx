@@ -115,19 +115,19 @@ export function StepLogoPalette() {
             <button onClick={() => setMode("choose")} className="cursor-pointer transition-colors" style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", marginBottom: 16, display: "flex", alignItems: "center", gap: 4, background: "none", border: "none", fontFamily: "inherit" }}>
               ← Back to options
             </button>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" style={{ marginBottom: 32 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10, marginBottom: 32, maxHeight: 480, overflowY: "auto", paddingRight: 4 }}>
               {curatedPalettes.map((palette) => (
                 <motion.button key={palette.id} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={() => setSelectedPalette(palette.id)}
                   className="cursor-pointer text-left transition-all duration-200 overflow-hidden"
                   style={{
                     background: selectedPalette === palette.id ? "rgba(167,139,250,0.12)" : "rgba(255,255,255,0.04)",
                     border: selectedPalette === palette.id ? "0.5px solid rgba(167,139,250,0.6)" : "0.5px solid rgba(255,255,255,0.1)",
-                    borderRadius: 12,
+                    borderRadius: 10,
                   }}>
-                  <div className="flex" style={{ height: 48 }}>{palette.colors.map((color, i) => (<div key={i} className="flex-1 h-full" style={{ backgroundColor: color }} />))}</div>
-                  <div style={{ padding: "12px 16px" }}>
-                    <div style={{ fontSize: 13, fontWeight: 500, color: selectedPalette === palette.id ? "#fff" : "rgba(255,255,255,0.85)", marginBottom: 4 }}>{palette.name}</div>
-                    <div style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{palette.description}</div>
+                  <div style={{ display: "flex", height: 36 }}>{palette.colors.map((color, i) => (<div key={i} style={{ flex: 1, height: "100%", backgroundColor: color }} />))}</div>
+                  <div style={{ padding: "10px 12px" }}>
+                    <div style={{ fontSize: 12, fontWeight: 500, color: selectedPalette === palette.id ? "#fff" : "rgba(255,255,255,0.85)", marginBottom: 2 }}>{palette.name}</div>
+                    <div style={{ fontSize: 10, color: "rgba(255,255,255,0.35)", lineHeight: 1.4 }}>{palette.description}</div>
                   </div>
                 </motion.button>
               ))}

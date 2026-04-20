@@ -476,8 +476,334 @@ function InputPreview({
           </div>
         </div>
       );
-    default:
-      return null;
+    case "signature":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ border: `2px dashed ${palette.border}`, borderRadius: radius.lg, padding: "24px 16px", position: "relative", backgroundColor: palette.surface, minHeight: 100, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8 }}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={palette.textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
+              <path d="M17.5 2.5L21.5 6.5L7.5 20.5L2 22L3.5 16.5L17.5 2.5Z" />
+              <path d="M15 5L19 9" />
+            </svg>
+            <span style={{ fontSize: 12, color: palette.textSecondary, opacity: 0.6, fontFamily: system.typography.bodyFont }}>Draw your signature here</span>
+            <div style={{ position: "absolute", bottom: 20, left: 24, right: 24, height: 1, borderBottom: `1px dotted ${palette.border}` }} />
+          </div>
+          <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+            <div style={{ fontSize: 11, color: palette.textSecondary, backgroundColor: palette.surfaceMuted, padding: "4px 12px", borderRadius: radius.sm, border: `1px solid ${palette.border}`, cursor: "pointer" }}>Clear</div>
+            <div style={{ fontSize: 11, color: palette.textSecondary, backgroundColor: palette.surfaceMuted, padding: "4px 12px", borderRadius: radius.sm, border: `1px solid ${palette.border}`, cursor: "pointer" }}>Undo</div>
+          </div>
+        </div>
+      );
+    case "creditCard":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ ...baseInput, display: "flex", alignItems: "center", gap: 8, position: "relative" }} role="presentation">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={palette.textSecondary} strokeWidth="1.5" style={{ flexShrink: 0 }}>
+              <rect x="1" y="4" width="22" height="16" rx="3" />
+              <path d="M1 10H23" />
+            </svg>
+            <span style={{ color: palette.textSecondary, opacity: 0.6, flex: 1, fontFamily: "monospace", fontSize: 13, letterSpacing: 1.5 }}>{spec.formatting.placeholder || "4111 1111 1111 1111"}</span>
+          </div>
+          <div style={{ display: "flex", gap: 12, marginTop: 10 }}>
+            {["Visa", "Mastercard", "Mada"].map((brand) => (
+              <span key={brand} style={{ fontSize: 10, fontWeight: 600, color: palette.textSecondary, backgroundColor: palette.surfaceMuted, padding: "3px 10px", borderRadius: radius.sm, border: `1px solid ${palette.border}`, fontFamily: system.typography.bodyFont }}>{brand}</span>
+            ))}
+          </div>
+        </div>
+      );
+    case "iban":
+      return (
+        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+          {[baseInput, errorInput].map((style, idx) => (
+            <div key={idx} style={{ flex: 1, minWidth: 200 }}>
+              <span style={labelStyle}>{spec.label}</span>
+              <div style={{ ...style, display: "flex", alignItems: "center", gap: 6, fontFamily: "monospace", fontSize: 13, letterSpacing: 1 }} role="presentation">
+                {spec.formatting.prefix && <span style={{ color: palette.textSecondary, fontWeight: 600 }}>{spec.formatting.prefix}</span>}
+                <span style={{ color: palette.textSecondary, opacity: 0.6, flex: 1 }}>{spec.formatting.placeholder || "SA03 8000 0000 6080 1016 7519"}</span>
+              </div>
+              {idx === 1 && <div style={errorText}>{spec.errorMessages.invalid}</div>}
+            </div>
+          ))}
+        </div>
+      );
+    case "richText":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ backgroundColor: palette.surface, borderRadius: radius.md, border: `1px solid ${palette.border}`, overflow: "hidden" }}>
+            <div style={{ display: "flex", gap: 2, padding: "8px 12px", borderBottom: `1px solid ${palette.border}`, backgroundColor: palette.surfaceMuted }}>
+              {["B", "I", "U", "H1", "H2", "•", "1.", "🔗", "📷"].map((tool) => (
+                <div key={tool} style={{ width: 28, height: 28, borderRadius: radius.sm, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: tool === "B" ? 700 : tool === "I" ? 400 : 500, fontStyle: tool === "I" ? "italic" : "normal", color: palette.textSecondary, cursor: "pointer", fontFamily: system.typography.bodyFont }}>{tool}</div>
+              ))}
+            </div>
+            <div style={{ padding: 16, minHeight: 80, color: palette.textSecondary, opacity: 0.6, fontSize: 14, fontFamily: system.typography.bodyFont }}>{spec.formatting.placeholder || "Start writing..."}</div>
+          </div>
+        </div>
+      );
+    case "multiSelect":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ ...baseInput, display: "flex", alignItems: "center", flexWrap: "wrap", gap: 6, minHeight: 42 }} role="presentation">
+            {["Option A", "Option B"].map((tag) => (
+              <span key={tag} style={{ fontSize: 12, fontWeight: 500, color: palette.textPrimary, backgroundColor: palette.surfaceMuted, padding: "2px 8px", borderRadius: radius.sm, display: "flex", alignItems: "center", gap: 4, border: `1px solid ${palette.border}`, fontFamily: system.typography.bodyFont }}>
+                {tag}
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 3L9 9M9 3L3 9" stroke={palette.textSecondary} strokeWidth="1.2" strokeLinecap="round" /></svg>
+              </span>
+            ))}
+            <span style={{ color: palette.textSecondary, opacity: 0.5, fontSize: 13 }}>Add more…</span>
+          </div>
+        </div>
+      );
+    case "autocomplete":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ ...baseInput, display: "flex", alignItems: "center", gap: 8 }} role="presentation">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke={palette.textSecondary} strokeWidth="1.2" /><path d="M10.5 10.5L13.5 13.5" stroke={palette.textSecondary} strokeWidth="1.2" strokeLinecap="round" /></svg>
+            <span style={{ color: palette.textSecondary, opacity: 0.6, flex: 1 }}>{spec.formatting.placeholder || "Start typing..."}</span>
+          </div>
+          <div style={{ marginTop: 4, border: `1px solid ${palette.border}`, borderRadius: radius.md, backgroundColor: palette.surface, overflow: "hidden", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}>
+            {["Suggestion 1", "Suggestion 2", "Suggestion 3"].map((s, i) => (
+              <div key={s} style={{ padding: "8px 14px", fontSize: 13, color: i === 0 ? palette.primary : palette.textPrimary, backgroundColor: i === 0 ? palette.surfaceMuted : "transparent", fontFamily: system.typography.bodyFont, cursor: "pointer" }}>{s}</div>
+            ))}
+          </div>
+        </div>
+      );
+    case "dateTime":
+      return (
+        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+          {[false, true].map((isError) => (
+            <div key={String(isError)} style={{ flex: 1, minWidth: 200 }}>
+              <span style={labelStyle}>{spec.label}</span>
+              <div style={{ ...(isError ? errorInput : baseInput), display: "flex", alignItems: "center", justifyContent: "space-between" }} role="presentation">
+                <span style={{ color: palette.textSecondary, opacity: 0.6 }}>DD/MM/YYYY HH:MM</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="3" width="12" height="11" rx="2" stroke={isError ? palette.danger : palette.textSecondary} strokeWidth="1.2" />
+                  <path d="M2 7H14" stroke={isError ? palette.danger : palette.textSecondary} strokeWidth="1.2" />
+                </svg>
+              </div>
+              {isError && <div style={errorText}>{spec.errorMessages.invalid}</div>}
+            </div>
+          ))}
+        </div>
+      );
+    case "mapLocation":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ backgroundColor: palette.surfaceMuted, borderRadius: radius.lg, border: `1px solid ${palette.border}`, overflow: "hidden", position: "relative", height: 120 }}>
+            <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6 }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill={palette.primary} stroke="none">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+              <span style={{ fontSize: 11, color: palette.textSecondary, fontFamily: system.typography.bodyFont }}>Click to select location on map</span>
+            </div>
+          </div>
+          <div style={{ ...baseInput, marginTop: 8, display: "flex", alignItems: "center", gap: 6 }} role="presentation">
+            <span style={{ color: palette.textSecondary, opacity: 0.6, fontSize: 12 }}>{spec.formatting.placeholder || "24.7136, 46.6753"}</span>
+          </div>
+        </div>
+      );
+    case "avatar":
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ width: 64, height: 64, borderRadius: "50%", backgroundColor: palette.surfaceMuted, border: `2px dashed ${palette.border}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={palette.textSecondary} strokeWidth="1.5" style={{ opacity: 0.5 }}>
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+            </svg>
+          </div>
+          <div>
+            <span style={labelStyle}>{spec.label}</span>
+            <div style={{ fontSize: 12, color: palette.textSecondary, fontFamily: system.typography.bodyFont, marginTop: 2 }}>JPG, PNG — max 2 MB</div>
+            <div style={{ fontSize: 12, color: palette.primary, fontFamily: system.typography.bodyFont, marginTop: 6, cursor: "pointer" }}>Upload photo</div>
+          </div>
+        </div>
+      );
+    case "pinCode":
+      return (
+        <div>
+          <span style={labelStyle}>Enter PIN</span>
+          <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} style={{ width: 44, height: 52, borderRadius: radius.md, border: `1.5px solid ${i < 2 ? palette.primary : palette.border}`, backgroundColor: palette.surface, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 700, color: palette.textPrimary, fontFamily: "monospace" }}>
+                {i < 2 ? "●" : ""}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    case "quantityStepper":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 0, marginTop: 4, width: "fit-content" }}>
+            <div style={{ width: 36, height: 36, borderRadius: `${radius.md} 0 0 ${radius.md}`, border: `1px solid ${palette.border}`, backgroundColor: palette.surfaceMuted, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 18, fontWeight: 600, color: palette.textSecondary }}>−</div>
+            <div style={{ width: 52, height: 36, border: `1px solid ${palette.border}`, borderLeftWidth: 0, borderRightWidth: 0, backgroundColor: palette.surface, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 600, color: palette.textPrimary, fontFamily: "monospace" }}>3</div>
+            <div style={{ width: 36, height: 36, borderRadius: `0 ${radius.md} ${radius.md} 0`, border: `1px solid ${palette.border}`, backgroundColor: palette.surfaceMuted, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 18, fontWeight: 600, color: palette.textSecondary }}>+</div>
+          </div>
+        </div>
+      );
+    case "priority":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+            {[{ label: "Low", color: palette.info }, { label: "Medium", color: palette.warning }, { label: "High", color: palette.danger }, { label: "Critical", color: "#9333EA" }].map((p, i) => (
+              <div key={p.label} style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: radius.md, backgroundColor: i === 2 ? p.color + "15" : palette.surface, border: `1px solid ${i === 2 ? p.color : palette.border}`, cursor: "pointer" }}>
+                <div style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: p.color }} />
+                <span style={{ fontSize: 12, fontWeight: 500, color: i === 2 ? p.color : palette.textPrimary, fontFamily: system.typography.bodyFont }}>{p.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    case "status":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+            {[{ label: "Draft", color: palette.textSecondary }, { label: "In Review", color: palette.warning }, { label: "Approved", color: palette.success }, { label: "Rejected", color: palette.danger }].map((s) => (
+              <span key={s.label} style={{ fontSize: 11, fontWeight: 600, padding: "4px 12px", borderRadius: "9999px", backgroundColor: s.color + "15", color: s.color, fontFamily: system.typography.bodyFont }}>{s.label}</span>
+            ))}
+          </div>
+        </div>
+      );
+    case "mention":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ ...baseInput, minHeight: 44 }} role="presentation">
+            <span style={{ color: palette.primary, fontWeight: 500 }}>@ahmed</span>
+            <span style={{ color: palette.textSecondary, opacity: 0.6 }}> {spec.formatting.placeholder || "Type @ to mention someone..."}</span>
+          </div>
+        </div>
+      );
+    case "markdown": case "codeEditor":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ backgroundColor: palette.surface, borderRadius: radius.md, border: `1px solid ${palette.border}`, overflow: "hidden" }}>
+            <div style={{ display: "flex", gap: 0, borderBottom: `1px solid ${palette.border}` }}>
+              {["Write", "Preview"].map((tab, i) => (
+                <div key={tab} style={{ padding: "8px 16px", fontSize: 12, fontWeight: 600, color: i === 0 ? palette.primary : palette.textSecondary, borderBottom: i === 0 ? `2px solid ${palette.primary}` : "none", fontFamily: system.typography.bodyFont, cursor: "pointer" }}>{tab}</div>
+              ))}
+            </div>
+            <div style={{ padding: 16, minHeight: 80, fontFamily: "monospace", fontSize: 13, color: palette.textSecondary, opacity: 0.6 }}>{spec.formatting.placeholder || "// Start writing..."}</div>
+          </div>
+        </div>
+      );
+    case "consent":
+      return (
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "12px 16px", backgroundColor: palette.surfaceMuted, borderRadius: radius.md, border: `1px solid ${palette.border}` }}>
+          <div style={{ width: 20, height: 20, borderRadius: radius.sm, border: `2px solid ${palette.primary}`, backgroundColor: palette.primary, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </div>
+          <span style={{ fontSize: 13, color: palette.textPrimary, lineHeight: 1.5, fontFamily: system.typography.bodyFont }}>I agree to the Terms and Conditions and Privacy Policy</span>
+        </div>
+      );
+    case "gender":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ display: "flex", gap: 10, marginTop: 4 }}>
+            {["Male", "Female", "Prefer not to say"].map((opt, i) => (
+              <div key={opt} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 14px", borderRadius: radius.md, backgroundColor: i === 0 ? palette.primary + "10" : palette.surface, border: `1px solid ${i === 0 ? palette.primary : palette.border}`, cursor: "pointer" }}>
+                <div style={{ width: 16, height: 16, borderRadius: "50%", border: `2px solid ${i === 0 ? palette.primary : palette.border}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  {i === 0 && <div style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: palette.primary }} />}
+                </div>
+                <span style={{ fontSize: 13, color: palette.textPrimary, fontFamily: system.typography.bodyFont }}>{opt}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    case "duration":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+            {[{ label: "Hours", val: "02" }, { label: "Minutes", val: "30" }, { label: "Seconds", val: "00" }].map((u) => (
+              <div key={u.label} style={{ textAlign: "center" }}>
+                <div style={{ ...baseInput, width: 56, textAlign: "center", fontFamily: "monospace", fontSize: 16, fontWeight: 600, color: palette.textPrimary, display: "flex", alignItems: "center", justifyContent: "center" }}>{u.val}</div>
+                <span style={{ fontSize: 10, color: palette.textSecondary, marginTop: 4, display: "block", fontFamily: system.typography.bodyFont }}>{u.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    case "treeSelect":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ backgroundColor: palette.surface, borderRadius: radius.md, border: `1px solid ${palette.border}`, padding: 12 }}>
+            {[{ label: "Category A", depth: 0, open: true }, { label: "Sub-category 1", depth: 1, open: false }, { label: "Sub-category 2", depth: 1, open: false }, { label: "Category B", depth: 0, open: false }].map((node) => (
+              <div key={node.label} style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 0", paddingLeft: node.depth * 20 }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={palette.textSecondary} strokeWidth="1.2" style={{ flexShrink: 0 }}>
+                  {node.open ? <path d="M3 5L7 9L11 5" strokeLinecap="round" strokeLinejoin="round" /> : <path d="M5 3L9 7L5 11" strokeLinecap="round" strokeLinejoin="round" />}
+                </svg>
+                <span style={{ fontSize: 13, color: palette.textPrimary, fontFamily: system.typography.bodyFont }}>{node.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    case "dynamicList":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 4 }}>
+            {["Item 1", "Item 2"].map((item, i) => (
+              <div key={item} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: 11, color: palette.textSecondary, fontFamily: "monospace", width: 16 }}>{i + 1}.</span>
+                <div style={{ ...baseInput, flex: 1 }} role="presentation"><span style={{ color: palette.textSecondary, opacity: 0.6 }}>{item}</span></div>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke={palette.danger} strokeWidth="1.5" style={{ cursor: "pointer", flexShrink: 0 }}><path d="M4 4L12 12M12 4L4 12" strokeLinecap="round" /></svg>
+              </div>
+            ))}
+            <div style={{ fontSize: 12, color: palette.primary, cursor: "pointer", display: "flex", alignItems: "center", gap: 4, fontFamily: system.typography.bodyFont }}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M7 3V11M3 7H11" strokeLinecap="round" /></svg>
+              Add item
+            </div>
+          </div>
+        </div>
+      );
+    case "schedule":
+      return (
+        <div>
+          <span style={labelStyle}>{spec.label}</span>
+          <div style={{ display: "grid", gridTemplateColumns: "auto 1fr 1fr", gap: 6, marginTop: 4 }}>
+            {["Sun", "Mon", "Tue", "Wed", "Thu"].map((day, i) => (
+              <React.Fragment key={day}>
+                <span style={{ fontSize: 12, fontWeight: 600, color: palette.textPrimary, fontFamily: system.typography.bodyFont, paddingTop: 8 }}>{day}</span>
+                <div style={{ ...baseInput, fontSize: 12, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}><span style={{ color: palette.textSecondary, opacity: 0.6 }}>{i < 5 ? "09:00" : "—"}</span></div>
+                <div style={{ ...baseInput, fontSize: 12, textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center" }}><span style={{ color: palette.textSecondary, opacity: 0.6 }}>{i < 5 ? "17:00" : "—"}</span></div>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      );
+    default: {
+      const hasPrefix = Boolean(spec.formatting.prefix);
+      const hasSuffix = Boolean(spec.formatting.suffix);
+      const hasMask = Boolean(spec.formatting.mask);
+      return (
+        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+          {[baseInput, errorInput].map((style, idx) => (
+            <div key={idx} style={{ flex: 1, minWidth: 200 }}>
+              <span style={labelStyle}>{spec.label}</span>
+              <div style={{ ...style, display: "flex", alignItems: "center", gap: 6 }} role="presentation">
+                {hasPrefix && <span style={{ color: palette.textSecondary, fontFamily: "monospace", fontSize: 13 }}>{spec.formatting.prefix}</span>}
+                <span style={{ color: palette.textSecondary, opacity: 0.6, flex: 1, fontFamily: hasMask ? "monospace" : "inherit", letterSpacing: hasMask ? 1 : 0 }}>{spec.formatting.placeholder || spec.label}</span>
+                {hasSuffix && <span style={{ color: palette.textSecondary, fontFamily: "monospace", fontSize: 13 }}>{spec.formatting.suffix}</span>}
+              </div>
+              {idx === 1 && <div style={errorText}>{spec.errorMessages.invalid || spec.errorMessages.required}</div>}
+            </div>
+          ))}
+        </div>
+      );
+    }
   }
 }
 
