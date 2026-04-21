@@ -7,6 +7,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart2Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -14,7 +15,7 @@ const fadeUp = {
   animate: { opacity: 1, y: 0 },
 };
 
-export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
+export function ComponentsPart2({ system, content, activeSection }: ComponentsPart2Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const comp = system.components;
@@ -152,7 +153,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       <style>{shimmerKeyframes}</style>
 
       {/* ─── 1. SIDEBARS ─── */}
-      <motion.section id="comp-sidebars" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={sectionDivider(false)}>
+      <motion.section id="comp-sidebars" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={{ ...sectionDivider(false), display: activeSection === "comp-sidebars" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Sidebars</h2>
         <p style={editorialDesc}>
@@ -360,7 +361,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       </motion.section>
 
       {/* ─── 2. NAV BARS ─── */}
-      <motion.section id="comp-nav-bars" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={sectionDivider(false)}>
+      <motion.section id="comp-nav-bars" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={{ ...sectionDivider(false), display: activeSection === "comp-nav-bars" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Nav Bars</h2>
         <p style={editorialDesc}>
@@ -537,7 +538,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       </motion.section>
 
       {/* ─── 3. MODALS ─── */}
-      <motion.section id="comp-modals" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={sectionDivider(false)}>
+      <motion.section id="comp-modals" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={{ ...sectionDivider(false), display: activeSection === "comp-modals" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Modals</h2>
         <p style={editorialDesc}>
@@ -648,7 +649,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       </motion.section>
 
       {/* ─── 4. DRAWERS ─── */}
-      <motion.section id="comp-drawers" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={sectionDivider(false)}>
+      <motion.section id="comp-drawers" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={{ ...sectionDivider(false), display: activeSection === "comp-drawers" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Drawers</h2>
         <p style={editorialDesc}>
@@ -767,7 +768,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       </motion.section>
 
       {/* ─── 5. ALERTS ─── */}
-      <motion.section id="comp-alerts" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={sectionDivider(false)}>
+      <motion.section id="comp-alerts" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={{ ...sectionDivider(false), display: activeSection === "comp-alerts" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Alerts</h2>
         <p style={editorialDesc}>
@@ -870,7 +871,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       </motion.section>
 
       {/* ─── 6. EMPTY STATES ─── */}
-      <motion.section id="comp-empty-states" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={sectionDivider(false)}>
+      <motion.section id="comp-empty-states" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={{ ...sectionDivider(false), display: activeSection === "comp-empty-states" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Empty States</h2>
         <p style={editorialDesc}>
@@ -954,7 +955,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       </motion.section>
 
       {/* ─── 7. SKELETON STATES ─── */}
-      <motion.section id="comp-skeleton" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={sectionDivider(false)}>
+      <motion.section id="comp-skeleton" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={{ ...sectionDivider(false), display: activeSection === "comp-skeleton" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Skeleton States</h2>
         <p style={editorialDesc}>
@@ -1049,7 +1050,7 @@ export function ComponentsPart2({ system, content }: ComponentsPart2Props) {
       </motion.section>
 
       {/* ─── 8. PROGRESS INDICATORS ─── */}
-      <motion.section id="comp-progress" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={sectionDivider(true)}>
+      <motion.section id="comp-progress" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={{ ...sectionDivider(true), display: activeSection === "comp-progress" ? undefined : "none" }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Progress Indicators</h2>
         <p style={editorialDesc}>

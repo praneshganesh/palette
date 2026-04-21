@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart6Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -97,7 +98,7 @@ function SvgIcon({ children, size = 24, color = "currentColor" }: { children: Re
   );
 }
 
-export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
+export function ComponentsPart6({ system, content, activeSection }: ComponentsPart6Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const comp = system.components;
@@ -184,7 +185,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     ];
 
     return (
-      <motion.section id="comp-icon-button" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={sectionWrap(false)}>
+      <motion.section id="comp-icon-button" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={{ ...sectionWrap(false), display: activeSection === "comp-icon-button" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Icon Button</h3>
         <p style={sectionDesc}>Icon-only action triggers in ghost, outlined, and filled variants across sizes.</p>
@@ -231,7 +232,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     };
 
     return (
-      <motion.section id="comp-number-input" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={sectionWrap()}>
+      <motion.section id="comp-number-input" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={{ ...sectionWrap(), display: activeSection === "comp-number-input" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Number Input</h3>
         <p style={sectionDesc}>Numeric stepper with increment / decrement controls and optional labels or unit suffixes.</p>
@@ -313,7 +314,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     });
 
     return (
-      <motion.section id="comp-range-slider" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={sectionWrap()}>
+      <motion.section id="comp-range-slider" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={{ ...sectionWrap(), display: activeSection === "comp-range-slider" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Range Slider</h3>
         <p style={sectionDesc}>Dual-handle range sliders for selecting value intervals with labeled bounds.</p>
@@ -366,7 +367,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     const suggestions = content.formFields.categories.filter((c) => !activeTags.includes(c));
 
     return (
-      <motion.section id="comp-tag-input" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={sectionWrap()}>
+      <motion.section id="comp-tag-input" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={{ ...sectionWrap(), display: activeSection === "comp-tag-input" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Tag Input</h3>
         <p style={sectionDesc}>Input field with removable tags for multi-value entry and inline suggestions.</p>
@@ -445,7 +446,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     );
 
     return (
-      <motion.section id="comp-rating" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={sectionWrap()}>
+      <motion.section id="comp-rating" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={{ ...sectionWrap(), display: activeSection === "comp-rating" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Rating</h3>
         <p style={sectionDesc}>Star rating components for display and interactive feedback scenarios.</p>
@@ -490,7 +491,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     const activeIdx = 3;
 
     return (
-      <motion.section id="comp-otp" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={sectionWrap()}>
+      <motion.section id="comp-otp" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={{ ...sectionWrap(), display: activeSection === "comp-otp" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>OTP / PIN Input</h3>
         <p style={sectionDesc}>Segmented digit inputs for verification codes with auto-advance focus.</p>
@@ -542,7 +543,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     const helperText: React.CSSProperties = { fontSize: 12, color: palette.textSecondary, marginTop: 4, fontFamily: system.typography.bodyFont };
 
     return (
-      <motion.section id="comp-form-layout" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={sectionWrap()}>
+      <motion.section id="comp-form-layout" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={{ ...sectionWrap(), display: activeSection === "comp-form-layout" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Form Layout</h3>
         <p style={sectionDesc}>Structured form sections with multi-column rows, required indicators, and helper text.</p>
@@ -596,7 +597,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     const progressPct = 50;
 
     return (
-      <motion.section id="comp-wizard" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={sectionWrap()}>
+      <motion.section id="comp-wizard" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={{ ...sectionWrap(), display: activeSection === "comp-wizard" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Multi-step Form</h3>
         <p style={sectionDesc}>Wizard pattern with step indicators, progress bar, and contextual form sections.</p>
@@ -685,7 +686,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     ];
 
     return (
-      <motion.section id="comp-validation" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={sectionWrap()}>
+      <motion.section id="comp-validation" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={{ ...sectionWrap(), display: activeSection === "comp-validation" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Inline Validation</h3>
         <p style={sectionDesc}>Input fields with real-time validation feedback using color-coded borders and messages.</p>
@@ -731,7 +732,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     };
 
     return (
-      <motion.section id="comp-autosave" data-comp-section {...fadeUp} transition={{ delay: 0.5 }} style={sectionWrap()}>
+      <motion.section id="comp-autosave" data-comp-section {...fadeUp} transition={{ delay: 0.5 }} style={{ ...sectionWrap(), display: activeSection === "comp-autosave" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Autosave Indicator</h3>
         <p style={sectionDesc}>Toolbar-style status indicators for autosave feedback in editing contexts.</p>
@@ -785,7 +786,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     };
 
     return (
-      <motion.section id="comp-char-counter" data-comp-section {...fadeUp} transition={{ delay: 0.55 }} style={sectionWrap()}>
+      <motion.section id="comp-char-counter" data-comp-section {...fadeUp} transition={{ delay: 0.55 }} style={{ ...sectionWrap(), display: activeSection === "comp-char-counter" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Character Counter</h3>
         <p style={sectionDesc}>Textarea with live character count feedback in normal, warning, and error states.</p>
@@ -846,7 +847,7 @@ export function ComponentsPart6({ system, content }: ComponentsPart6Props) {
     const [advancedOpen] = useState(true);
 
     return (
-      <motion.section id="comp-form-section" data-comp-section {...fadeUp} transition={{ delay: 0.6 }} style={sectionWrap()}>
+      <motion.section id="comp-form-section" data-comp-section {...fadeUp} transition={{ delay: 0.6 }} style={{ ...sectionWrap(), display: activeSection === "comp-form-section" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Form Section</h3>
         <p style={sectionDesc}>Grouped form fields with section headings, dividers, and collapsible advanced options.</p>

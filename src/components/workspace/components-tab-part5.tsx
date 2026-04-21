@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart5Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -101,7 +102,7 @@ function smoothPath(pts: [number, number][]): string {
   return d;
 }
 
-export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
+export function ComponentsPart5({ system, content, activeSection }: ComponentsPart5Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const comp = system.components;
@@ -134,7 +135,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           1. LINE CHART
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-line-chart" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={sectionWrap()}>
+      <motion.section id="comp-line-chart" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={{ ...sectionWrap(), display: activeSection === "comp-line-chart" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Line Chart</h3>
         <p style={sectionDesc}>
@@ -199,7 +200,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           2. BAR CHART
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-bar-chart" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={sectionWrap()}>
+      <motion.section id="comp-bar-chart" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={{ ...sectionWrap(), display: activeSection === "comp-bar-chart" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Bar Chart</h3>
         <p style={sectionDesc}>
@@ -275,7 +276,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           3. AREA CHART
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-area-chart" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={sectionWrap()}>
+      <motion.section id="comp-area-chart" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={{ ...sectionWrap(), display: activeSection === "comp-area-chart" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Area Chart</h3>
         <p style={sectionDesc}>
@@ -349,7 +350,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           4. DONUT CHART
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-pie-donut" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={sectionWrap()}>
+      <motion.section id="comp-pie-donut" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={{ ...sectionWrap(), display: activeSection === "comp-pie-donut" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Donut Chart</h3>
         <p style={sectionDesc}>
@@ -404,7 +405,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           5. SCATTER PLOT
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-scatter" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={sectionWrap()}>
+      <motion.section id="comp-scatter" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={{ ...sectionWrap(), display: activeSection === "comp-scatter" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Scatter Plot</h3>
         <p style={sectionDesc}>
@@ -458,7 +459,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           6. HEATMAP
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-heatmap" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={sectionWrap()}>
+      <motion.section id="comp-heatmap" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={{ ...sectionWrap(), display: activeSection === "comp-heatmap" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Heatmap</h3>
         <p style={sectionDesc}>
@@ -511,7 +512,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           7. KPI / STAT CARD ROW
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-kpi-cards" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={sectionWrap()}>
+      <motion.section id="comp-kpi-cards" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={{ ...sectionWrap(), display: activeSection === "comp-kpi-cards" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>KPI Cards</h3>
         <p style={sectionDesc}>
@@ -594,7 +595,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           8. FILTER BAR
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-filter-bar" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={sectionWrap()}>
+      <motion.section id="comp-filter-bar" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={{ ...sectionWrap(), display: activeSection === "comp-filter-bar" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Filter Bar</h3>
         <p style={sectionDesc}>
@@ -707,7 +708,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           9. TIMELINE / ACTIVITY FEED
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-timeline" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={sectionWrap()}>
+      <motion.section id="comp-timeline" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={{ ...sectionWrap(), display: activeSection === "comp-timeline" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Activity Feed</h3>
         <p style={sectionDesc}>
@@ -805,7 +806,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           10. CALENDAR
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-calendar" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={sectionWrap()}>
+      <motion.section id="comp-calendar" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={{ ...sectionWrap(), display: activeSection === "comp-calendar" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Calendar</h3>
         <p style={sectionDesc}>
@@ -933,7 +934,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           11. COMMAND PALETTE
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-command-palette" data-comp-section {...fadeUp} transition={{ delay: 0.5 }} style={sectionWrap()}>
+      <motion.section id="comp-command-palette" data-comp-section {...fadeUp} transition={{ delay: 0.5 }} style={{ ...sectionWrap(), display: activeSection === "comp-command-palette" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Command Palette</h3>
         <p style={sectionDesc}>
@@ -1075,7 +1076,7 @@ export function ComponentsPart5({ system, content }: ComponentsPart5Props) {
       {/* ═══════════════════════════════════════════════
           12. COMMENT THREAD
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-comment-thread" data-comp-section {...fadeUp} transition={{ delay: 0.55 }} style={sectionWrap(false)}>
+      <motion.section id="comp-comment-thread" data-comp-section {...fadeUp} transition={{ delay: 0.55 }} style={{ ...sectionWrap(false), display: activeSection === "comp-comment-thread" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Comment Thread</h3>
         <p style={sectionDesc}>

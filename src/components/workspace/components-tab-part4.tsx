@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart4Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -15,7 +16,7 @@ const fadeUp = {
   animate: { opacity: 1, y: 0 },
 };
 
-export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
+export function ComponentsPart4({ system, content, activeSection }: ComponentsPart4Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const comp = system.components;
@@ -140,7 +141,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           1. TOAST / SNACKBAR
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-toast" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={sectionSeparator}>
+      <motion.section id="comp-toast" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={{ ...sectionSeparator, display: activeSection === "comp-toast" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Toast / Snackbar</h3>
         <p style={sectionDesc}>
@@ -236,7 +237,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           2. POPOVER
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-popover" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={sectionSeparator}>
+      <motion.section id="comp-popover" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={{ ...sectionSeparator, display: activeSection === "comp-popover" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Popover</h3>
         <p style={sectionDesc}>
@@ -360,7 +361,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           3. PAGINATION
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-pagination" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={sectionSeparator}>
+      <motion.section id="comp-pagination" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={{ ...sectionSeparator, display: activeSection === "comp-pagination" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Pagination</h3>
         <p style={sectionDesc}>
@@ -530,7 +531,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           4. BREADCRUMBS
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-breadcrumbs" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={sectionSeparator}>
+      <motion.section id="comp-breadcrumbs" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={{ ...sectionSeparator, display: activeSection === "comp-breadcrumbs" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Breadcrumbs</h3>
         <p style={sectionDesc}>
@@ -621,7 +622,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           5. MENU / DROPDOWN
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-menu" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={sectionSeparator}>
+      <motion.section id="comp-menu" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={{ ...sectionSeparator, display: activeSection === "comp-menu" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Menu / Dropdown</h3>
         <p style={sectionDesc}>
@@ -721,7 +722,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           6. FILE UPLOAD
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-file-upload" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={sectionSeparator}>
+      <motion.section id="comp-file-upload" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={{ ...sectionSeparator, display: activeSection === "comp-file-upload" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>File Upload</h3>
         <p style={sectionDesc}>
@@ -835,7 +836,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           7. BUTTON GROUP
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-button-group" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={sectionSeparator}>
+      <motion.section id="comp-button-group" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={{ ...sectionSeparator, display: activeSection === "comp-button-group" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Button Group</h3>
         <p style={sectionDesc}>
@@ -981,7 +982,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           8. CHIP / TAG
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-chip" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={sectionSeparator}>
+      <motion.section id="comp-chip" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={{ ...sectionSeparator, display: activeSection === "comp-chip" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Chip / Tag</h3>
         <p style={sectionDesc}>
@@ -1158,7 +1159,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           9. DIVIDER
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-divider" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={sectionSeparator}>
+      <motion.section id="comp-divider" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={{ ...sectionSeparator, display: activeSection === "comp-divider" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Divider</h3>
         <p style={sectionDesc}>
@@ -1236,7 +1237,7 @@ export function ComponentsPart4({ system, content }: ComponentsPart4Props) {
       {/* ═══════════════════════════════════════════════
           10. LIST
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-list" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={{ paddingBottom: 24 }}>
+      <motion.section id="comp-list" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={{ paddingBottom: 24, display: activeSection === "comp-list" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>List</h3>
         <p style={sectionDesc}>

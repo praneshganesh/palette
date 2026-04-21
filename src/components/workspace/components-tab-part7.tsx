@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart7Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -27,7 +28,7 @@ function withAlpha(hex: string, alpha: number): string {
   return `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
 }
 
-export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
+export function ComponentsPart7({ system, content, activeSection }: ComponentsPart7Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const comp = system.components;
@@ -106,7 +107,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           1. PRODUCT / PROPERTY CARD
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-product-card" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={sectionWrap()}>
+      <motion.section id="comp-product-card" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={{ ...sectionWrap(), display: activeSection === "comp-product-card" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Product / Property Card</h3>
         <p style={sectionDesc}>
@@ -215,7 +216,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           2. PRICING CARD / PLAN
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-pricing" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={sectionWrap()}>
+      <motion.section id="comp-pricing" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={{ ...sectionWrap(), display: activeSection === "comp-pricing" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Pricing Plans</h3>
         <p style={sectionDesc}>
@@ -345,7 +346,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           3. CART ITEM
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-cart" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={sectionWrap()}>
+      <motion.section id="comp-cart" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={{ ...sectionWrap(), display: activeSection === "comp-cart" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Cart Items</h3>
         <p style={sectionDesc}>
@@ -477,7 +478,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           4. ORDER SUMMARY
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-order-summary" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={sectionWrap()}>
+      <motion.section id="comp-order-summary" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={{ ...sectionWrap(), display: activeSection === "comp-order-summary" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Order Summary</h3>
         <p style={sectionDesc}>
@@ -538,7 +539,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           5. INVOICE ROW
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-invoice" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={sectionWrap()}>
+      <motion.section id="comp-invoice" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={{ ...sectionWrap(), display: activeSection === "comp-invoice" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Invoice Table</h3>
         <p style={sectionDesc}>
@@ -617,7 +618,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           6. PRICE DISPLAY
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-price-display" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={sectionWrap()}>
+      <motion.section id="comp-price-display" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={{ ...sectionWrap(), display: activeSection === "comp-price-display" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Price Display</h3>
         <p style={sectionDesc}>
@@ -688,7 +689,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           7. BULK ACTION BAR
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-bulk-actions" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={sectionWrap()}>
+      <motion.section id="comp-bulk-actions" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={{ ...sectionWrap(), display: activeSection === "comp-bulk-actions" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Bulk Action Bar</h3>
         <p style={sectionDesc}>
@@ -787,7 +788,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           8. ADVANCED FILTERS / QUERY BUILDER
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-query-builder" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={sectionWrap()}>
+      <motion.section id="comp-query-builder" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={{ ...sectionWrap(), display: activeSection === "comp-query-builder" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Query Builder</h3>
         <p style={sectionDesc}>
@@ -935,7 +936,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           9. APPROVAL FLOW
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-approval-flow" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={sectionWrap()}>
+      <motion.section id="comp-approval-flow" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={{ ...sectionWrap(), display: activeSection === "comp-approval-flow" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Approval Flow</h3>
         <p style={sectionDesc}>
@@ -1033,7 +1034,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           10. DIFF / COMPARISON VIEW
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-diff-view" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={sectionWrap()}>
+      <motion.section id="comp-diff-view" data-comp-section {...fadeUp} transition={{ delay: 0.45 }} style={{ ...sectionWrap(), display: activeSection === "comp-diff-view" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Diff / Comparison View</h3>
         <p style={sectionDesc}>
@@ -1094,7 +1095,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           11. VERSION HISTORY
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-version-history" data-comp-section {...fadeUp} transition={{ delay: 0.5 }} style={sectionWrap()}>
+      <motion.section id="comp-version-history" data-comp-section {...fadeUp} transition={{ delay: 0.5 }} style={{ ...sectionWrap(), display: activeSection === "comp-version-history" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Version History</h3>
         <p style={sectionDesc}>
@@ -1195,7 +1196,7 @@ export function ComponentsPart7({ system, content }: ComponentsPart7Props) {
       {/* ═══════════════════════════════════════════════
           12. STATUS WORKFLOW (Kanban-style)
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-status-workflow" data-comp-section {...fadeUp} transition={{ delay: 0.55 }} style={sectionWrap(false)}>
+      <motion.section id="comp-status-workflow" data-comp-section {...fadeUp} transition={{ delay: 0.55 }} style={{ ...sectionWrap(false), display: activeSection === "comp-status-workflow" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Status Workflow</h3>
         <p style={sectionDesc}>

@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart10Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -27,7 +28,7 @@ function withAlpha(hex: string, alpha: number): string {
   return `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
 }
 
-export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
+export function ComponentsPart10({ system, content, activeSection }: ComponentsPart10Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const radius = system.spacing.radius;
@@ -68,7 +69,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
   return (
     <>
       {/* 1 — Responsive Table */}
-      <motion.section id="comp-responsive-table" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.05 }}>
+      <motion.section id="comp-responsive-table" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-responsive-table" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.05 }}>
         <p style={sectionTitle}>Responsive Table</p>
         <p style={sectionDesc}>Data tables adapt from full multi-column layout on desktop to stacked card-based rows on mobile.</p>
         <div style={cardBox}>
@@ -119,7 +120,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 2 — Responsive Navigation Menu */}
-      <motion.section id="comp-responsive-menu" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.1 }}>
+      <motion.section id="comp-responsive-menu" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-responsive-menu" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.1 }}>
         <p style={sectionTitle}>Responsive Navigation</p>
         <p style={sectionDesc}>Desktop uses a persistent sidebar; mobile collapses to hamburger menu with slide-out drawer or bottom navigation.</p>
         <div style={cardBox}>
@@ -175,7 +176,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 3 — Responsive Dropdown / Select */}
-      <motion.section id="comp-responsive-dropdown" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.15 }}>
+      <motion.section id="comp-responsive-dropdown" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-responsive-dropdown" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.15 }}>
         <p style={sectionTitle}>Responsive Dropdown</p>
         <p style={sectionDesc}>Dropdowns display inline on desktop but transform into full-screen action sheets on mobile for easier touch selection.</p>
         <div style={cardBox}>
@@ -221,7 +222,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 4 — Responsive Grid */}
-      <motion.section id="comp-responsive-grid" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.2 }}>
+      <motion.section id="comp-responsive-grid" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-responsive-grid" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.2 }}>
         <p style={sectionTitle}>Responsive Grid</p>
         <p style={sectionDesc}>Card grids adapt from 3–4 columns on desktop to a single-column stacked layout on mobile viewports.</p>
         <div style={cardBox}>
@@ -258,7 +259,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 5 — Responsive Modal / Dialog */}
-      <motion.section id="comp-responsive-modal" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.25 }}>
+      <motion.section id="comp-responsive-modal" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-responsive-modal" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.25 }}>
         <p style={sectionTitle}>Responsive Modal</p>
         <p style={sectionDesc}>Desktop modals are centered dialogs; on mobile they expand to full-screen sheets sliding from the bottom.</p>
         <div style={cardBox}>
@@ -310,7 +311,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 6 — Action Sheet */}
-      <motion.section id="comp-action-sheet" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.3 }}>
+      <motion.section id="comp-action-sheet" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-action-sheet" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.3 }}>
         <p style={sectionTitle}>Action Sheet</p>
         <p style={sectionDesc}>iOS/Android-style action sheet sliding from the bottom with grouped options and a cancel button.</p>
         <div style={cardBox}>
@@ -336,7 +337,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 7 — Swipe Actions */}
-      <motion.section id="comp-swipe-actions" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.35 }}>
+      <motion.section id="comp-swipe-actions" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-swipe-actions" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.35 }}>
         <p style={sectionTitle}>Swipe Actions</p>
         <p style={sectionDesc}>List rows with swipe-to-reveal actions, a common mobile pattern for quick edit, archive, or delete.</p>
         <div style={cardBox}>
@@ -382,7 +383,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 8 — Pull to Refresh */}
-      <motion.section id="comp-pull-refresh" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.4 }}>
+      <motion.section id="comp-pull-refresh" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-pull-refresh" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.4 }}>
         <p style={sectionTitle}>Pull to Refresh</p>
         <p style={sectionDesc}>Native-feel pull-to-refresh indicator that appears at the top of scrollable content on mobile.</p>
         <div style={cardBox}>
@@ -417,7 +418,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 9 — Mobile Tabs */}
-      <motion.section id="comp-mobile-tabs" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.45 }}>
+      <motion.section id="comp-mobile-tabs" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-mobile-tabs" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.45 }}>
         <p style={sectionTitle}>Mobile Tabs</p>
         <p style={sectionDesc}>Horizontally scrollable tab bar for mobile, replacing desktop-style full-width tabs.</p>
         <div style={cardBox}>
@@ -447,7 +448,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 10 — Mobile Search */}
-      <motion.section id="comp-mobile-search" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.5 }}>
+      <motion.section id="comp-mobile-search" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-mobile-search" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.5 }}>
         <p style={sectionTitle}>Mobile Search</p>
         <p style={sectionDesc}>Full-screen expandable search with recent searches, suggestions, and keyboard-aware layout.</p>
         <div style={cardBox}>
@@ -485,7 +486,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 11 — Toast / Snackbar Mobile */}
-      <motion.section id="comp-mobile-toast" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.55 }}>
+      <motion.section id="comp-mobile-toast" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-mobile-toast" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.55 }}>
         <p style={sectionTitle}>Mobile Toast / Snackbar</p>
         <p style={sectionDesc}>Full-width toast notifications positioned at the bottom of mobile screens, above the navigation bar.</p>
         <div style={cardBox}>
@@ -519,7 +520,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 12 — Responsive Form */}
-      <motion.section id="comp-responsive-form" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.6 }}>
+      <motion.section id="comp-responsive-form" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-responsive-form" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.6 }}>
         <p style={sectionTitle}>Responsive Form</p>
         <p style={sectionDesc}>Desktop uses two-column side-by-side fields; mobile stacks to single-column with larger touch-friendly inputs.</p>
         <div style={cardBox}>
@@ -574,7 +575,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 13 — Floating Header (Scroll-to-Hide) */}
-      <motion.section id="comp-floating-header" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.65 }}>
+      <motion.section id="comp-floating-header" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-floating-header" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.65 }}>
         <p style={sectionTitle}>Floating Header</p>
         <p style={sectionDesc}>Mobile header that hides on scroll down and reappears on scroll up, maximizing content viewport.</p>
         <div style={cardBox}>
@@ -618,7 +619,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 14 — Sticky Bottom CTA Bar */}
-      <motion.section id="comp-sticky-bottom" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.7 }}>
+      <motion.section id="comp-sticky-bottom" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-sticky-bottom" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.7 }}>
         <p style={sectionTitle}>Sticky Bottom CTA Bar</p>
         <p style={sectionDesc}>Fixed-bottom action bar for mobile checkout, form submission, or primary actions, safe from home indicator.</p>
         <div style={cardBox}>
@@ -654,7 +655,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 15 — Mobile Stepper */}
-      <motion.section id="comp-mobile-stepper" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.75 }}>
+      <motion.section id="comp-mobile-stepper" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-mobile-stepper" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.75 }}>
         <p style={sectionTitle}>Mobile Stepper</p>
         <p style={sectionDesc}>Compact progress stepper for multi-step mobile flows with dots, back/next buttons, and progress bar variants.</p>
         <div style={cardBox}>
@@ -700,7 +701,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 16 — Swipe Carousel / Pager */}
-      <motion.section id="comp-swipe-carousel" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.8 }}>
+      <motion.section id="comp-swipe-carousel" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-swipe-carousel" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.8 }}>
         <p style={sectionTitle}>Swipe Carousel</p>
         <p style={sectionDesc}>Touch-optimized horizontal card carousel with peek-next-card pattern and dot indicators.</p>
         <div style={cardBox}>
@@ -737,7 +738,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 17 — Mobile Chip Filter Bar */}
-      <motion.section id="comp-chip-filter" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.85 }}>
+      <motion.section id="comp-chip-filter" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-chip-filter" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.85 }}>
         <p style={sectionTitle}>Mobile Chip Filter</p>
         <p style={sectionDesc}>Horizontally scrollable filter chips for mobile, replacing desktop dropdown filter bars.</p>
         <div style={cardBox}>
@@ -774,7 +775,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 18 — Mobile Image Viewer */}
-      <motion.section id="comp-image-viewer" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.9 }}>
+      <motion.section id="comp-image-viewer" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-image-viewer" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.9 }}>
         <p style={sectionTitle}>Mobile Image Viewer</p>
         <p style={sectionDesc}>Full-screen image viewer with pinch-to-zoom, swipe navigation, and share/download actions.</p>
         <div style={cardBox}>
@@ -809,7 +810,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 19 — Gesture Indicator */}
-      <motion.section id="comp-gesture-hint" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.95 }}>
+      <motion.section id="comp-gesture-hint" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-gesture-hint" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.95 }}>
         <p style={sectionTitle}>Gesture Hints</p>
         <p style={sectionDesc}>Visual indicators showing users available touch gestures — swipe, pinch, long-press, and drag.</p>
         <div style={cardBox}>
@@ -833,7 +834,7 @@ export function ComponentsPart10({ system, content }: ComponentsPart10Props) {
       </motion.section>
 
       {/* 20 — Mobile Onboarding / Walkthrough */}
-      <motion.section id="comp-mobile-onboarding" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 1.0 }}>
+      <motion.section id="comp-mobile-onboarding" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-mobile-onboarding" ? undefined : "none" }} {...fadeUp} transition={{ delay: 1.0 }}>
         <p style={sectionTitle}>Mobile Onboarding</p>
         <p style={sectionDesc}>Swipeable onboarding walkthrough screens with illustrations, progress dots, and skip/next actions.</p>
         <div style={cardBox}>

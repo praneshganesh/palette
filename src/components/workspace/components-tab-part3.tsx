@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart3Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -59,7 +60,7 @@ const iconData: { name: string; path: React.ReactNode }[] = [
   { name: "Heart", path: <><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" /></> },
 ];
 
-export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
+export function ComponentsPart3({ system, content, activeSection }: ComponentsPart3Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
 
@@ -160,7 +161,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           1. ACCORDION
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-accordion" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={sectionSeparator}>
+      <motion.section id="comp-accordion" data-comp-section {...fadeUp} transition={{ delay: 0 }} style={{ ...sectionSeparator, display: activeSection === "comp-accordion" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Accordion</h3>
         <p style={sectionDesc}>
@@ -310,7 +311,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           2. AVATAR
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-avatar" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={sectionSeparator}>
+      <motion.section id="comp-avatar" data-comp-section {...fadeUp} transition={{ delay: 0.05 }} style={{ ...sectionSeparator, display: activeSection === "comp-avatar" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Avatar</h3>
         <p style={sectionDesc}>
@@ -505,7 +506,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           3. CAROUSEL
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-carousel" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={sectionSeparator}>
+      <motion.section id="comp-carousel" data-comp-section {...fadeUp} transition={{ delay: 0.1 }} style={{ ...sectionSeparator, display: activeSection === "comp-carousel" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Carousel</h3>
         <p style={sectionDesc}>
@@ -631,7 +632,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           4. FOOTER
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-footer" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={sectionSeparator}>
+      <motion.section id="comp-footer" data-comp-section {...fadeUp} transition={{ delay: 0.15 }} style={{ ...sectionSeparator, display: activeSection === "comp-footer" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Footer</h3>
         <p style={sectionDesc}>
@@ -711,7 +712,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           5. ICON LIBRARY
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-icon-library" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={sectionSeparator}>
+      <motion.section id="comp-icon-library" data-comp-section {...fadeUp} transition={{ delay: 0.2 }} style={{ ...sectionSeparator, display: activeSection === "comp-icon-library" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Icon Library</h3>
         <p style={sectionDesc}>
@@ -790,7 +791,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           6. SEARCH BAR
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-search-bar" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={sectionSeparator}>
+      <motion.section id="comp-search-bar" data-comp-section {...fadeUp} transition={{ delay: 0.25 }} style={{ ...sectionSeparator, display: activeSection === "comp-search-bar" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Search Bar</h3>
         <p style={sectionDesc}>
@@ -902,7 +903,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           7. SLIDER
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-slider" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={sectionSeparator}>
+      <motion.section id="comp-slider" data-comp-section {...fadeUp} transition={{ delay: 0.3 }} style={{ ...sectionSeparator, display: activeSection === "comp-slider" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Slider</h3>
         <p style={sectionDesc}>
@@ -1027,7 +1028,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           8. TOGGLE
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-toggle" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={sectionSeparator}>
+      <motion.section id="comp-toggle" data-comp-section {...fadeUp} transition={{ delay: 0.35 }} style={{ ...sectionSeparator, display: activeSection === "comp-toggle" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Toggle</h3>
         <p style={sectionDesc}>
@@ -1156,7 +1157,7 @@ export function ComponentsPart3({ system, content }: ComponentsPart3Props) {
       {/* ═══════════════════════════════════════════════
           9. TOOLTIP
          ═══════════════════════════════════════════════ */}
-      <motion.section id="comp-tooltip" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={{ paddingBottom: 24 }}>
+      <motion.section id="comp-tooltip" data-comp-section {...fadeUp} transition={{ delay: 0.4 }} style={{ paddingBottom: 24, display: activeSection === "comp-tooltip" ? undefined : "none" }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Tooltip</h3>
         <p style={sectionDesc}>

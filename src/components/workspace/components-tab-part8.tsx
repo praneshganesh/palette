@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart8Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -64,7 +65,7 @@ const speedDialItems = [
   { label: "Share", icon: "M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v13" },
 ];
 
-export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
+export function ComponentsPart8({ system, content, activeSection }: ComponentsPart8Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const comp = system.components;
@@ -80,7 +81,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
   return (
     <>
       {/* ── 1. Chat Bubble ── */}
-      <motion.div id="comp-chat" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.05 }}>
+      <motion.div id="comp-chat" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-chat" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.05 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Chat Bubble</h3>
         <p style={sectionDesc}>Real-time messaging with sent/received styling, timestamps, and typing indicator.</p>
@@ -188,7 +189,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 2. Message Composer ── */}
-      <motion.div id="comp-composer" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.1 }}>
+      <motion.div id="comp-composer" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-composer" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.1 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Message Composer</h3>
         <p style={sectionDesc}>Rich text input with formatting toolbar, attachments, mentions, and send controls.</p>
@@ -342,7 +343,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 3. Presence Indicator ── */}
-      <motion.div id="comp-presence" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.15 }}>
+      <motion.div id="comp-presence" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-presence" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.15 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Presence Indicator</h3>
         <p style={sectionDesc}>User presence states shown as avatar badges and a detailed status list.</p>
@@ -501,7 +502,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 4. Reaction Picker ── */}
-      <motion.div id="comp-reactions" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.2 }}>
+      <motion.div id="comp-reactions" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-reactions" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.2 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Reaction Picker</h3>
         <p style={sectionDesc}>Message reactions with counts, add button, and emoji picker grid.</p>
@@ -618,7 +619,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 5. Notification Panel ── */}
-      <motion.div id="comp-notifications" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.25 }}>
+      <motion.div id="comp-notifications" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-notifications" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.25 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Notification Panel</h3>
         <p style={sectionDesc}>Grouped notifications dropdown with read/unread states, timestamps, and actions.</p>
@@ -761,7 +762,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 6. Image Gallery / Lightbox ── */}
-      <motion.div id="comp-gallery" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.3 }}>
+      <motion.div id="comp-gallery" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-gallery" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.3 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Image Gallery / Lightbox</h3>
         <p style={sectionDesc}>Grid image gallery with gradient placeholders, selection state, and thumbnail strip.</p>
@@ -862,7 +863,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 7. Video Player ── */}
-      <motion.div id="comp-video" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.35 }}>
+      <motion.div id="comp-video" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-video" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.35 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Video Player</h3>
         <p style={sectionDesc}>Video player frame with controls, progress bar, and title overlay.</p>
@@ -970,7 +971,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 8. File Preview ── */}
-      <motion.div id="comp-file-preview" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.4 }}>
+      <motion.div id="comp-file-preview" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-file-preview" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.4 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>File Preview</h3>
         <p style={sectionDesc}>Compact file type cards with icons, metadata, and download actions.</p>
@@ -1075,7 +1076,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 9. Sign In Form ── */}
-      <motion.div id="comp-sign-in" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.45 }}>
+      <motion.div id="comp-sign-in" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-sign-in" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.45 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Sign In Form</h3>
         <p style={sectionDesc}>Complete authentication form with SSO options, remember me, and brand elements.</p>
@@ -1252,7 +1253,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 10. Profile Card ── */}
-      <motion.div id="comp-profile-card" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.5 }}>
+      <motion.div id="comp-profile-card" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-profile-card" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.5 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Profile Card</h3>
         <p style={sectionDesc}>Compact and detailed profile card variants with stats, actions, and social links.</p>
@@ -1438,7 +1439,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 11. Bottom Sheet ── */}
-      <motion.div id="comp-bottom-sheet" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.55 }}>
+      <motion.div id="comp-bottom-sheet" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-bottom-sheet" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.55 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Bottom Sheet</h3>
         <p style={sectionDesc}>Mobile-style bottom sheet with drag handle, filter content, and sticky actions.</p>
@@ -1608,7 +1609,7 @@ export function ComponentsPart8({ system, content }: ComponentsPart8Props) {
       </motion.div>
 
       {/* ── 12. Floating Action Button (FAB) ── */}
-      <motion.div id="comp-fab" data-comp-section style={sectionWrap(false)} {...fadeUp} transition={{ delay: 0.6 }}>
+      <motion.div id="comp-fab" data-comp-section style={{ ...sectionWrap(false), display: activeSection === "comp-fab" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.6 }}>
         <div style={accentBar} />
         <h3 style={sectionTitle}>Floating Action Button (FAB)</h3>
         <p style={sectionDesc}>Standard, extended, mini, and speed dial FAB variants in a mobile context.</p>

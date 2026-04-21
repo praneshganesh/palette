@@ -8,6 +8,7 @@ import { useDesignSystemStore } from "@/store/design-system";
 interface ComponentsPart9Props {
   system: DesignSystem;
   content: IndustryContent;
+  activeSection?: string;
 }
 
 const fadeUp = {
@@ -15,7 +16,7 @@ const fadeUp = {
   animate: { opacity: 1, y: 0 },
 };
 
-export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
+export function ComponentsPart9({ system, content, activeSection }: ComponentsPart9Props) {
   const { previewMode } = useDesignSystemStore();
   const palette = previewMode === "dark" ? system.darkPalette : system.palette;
   const comp = system.components;
@@ -109,7 +110,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
   return (
     <>
       {/* 1 — Segmented Control */}
-      <motion.section id="comp-segmented" data-comp-section style={sectionWrap(false)} {...fadeUp} transition={{ delay: 0.05 }}>
+      <motion.section id="comp-segmented" data-comp-section style={{ ...sectionWrap(false), display: activeSection === "comp-segmented" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.05 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Segmented Control</h2>
         <p style={sectionDesc}>
@@ -231,7 +232,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 2 — Mega Menu */}
-      <motion.section id="comp-mega-menu" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.1 }}>
+      <motion.section id="comp-mega-menu" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-mega-menu" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.1 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Mega Menu</h2>
         <p style={sectionDesc}>
@@ -307,7 +308,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 3 — Tree Navigation */}
-      <motion.section id="comp-tree-nav" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.15 }}>
+      <motion.section id="comp-tree-nav" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-tree-nav" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.15 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Tree Navigation</h2>
         <p style={sectionDesc}>
@@ -407,7 +408,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 4 — Anchor Navigation / Table of Contents */}
-      <motion.section id="comp-anchor-nav" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.2 }}>
+      <motion.section id="comp-anchor-nav" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-anchor-nav" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.2 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Anchor Navigation</h2>
         <p style={sectionDesc}>
@@ -480,7 +481,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 5 — Bottom Navigation (Mobile) */}
-      <motion.section id="comp-bottom-nav" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.25 }}>
+      <motion.section id="comp-bottom-nav" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-bottom-nav" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.25 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Bottom Navigation</h2>
         <p style={sectionDesc}>
@@ -587,7 +588,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 6 — Spinner / Loading */}
-      <motion.section id="comp-spinner" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.3 }}>
+      <motion.section id="comp-spinner" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-spinner" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.3 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Spinner / Loading</h2>
         <p style={sectionDesc}>
@@ -691,7 +692,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 7 — Error State */}
-      <motion.section id="comp-error-state" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.35 }}>
+      <motion.section id="comp-error-state" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-error-state" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.35 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Error State</h2>
         <p style={sectionDesc}>
@@ -755,7 +756,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 8 — Maintenance State */}
-      <motion.section id="comp-maintenance" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.4 }}>
+      <motion.section id="comp-maintenance" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-maintenance" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.4 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Maintenance State</h2>
         <p style={sectionDesc}>
@@ -843,7 +844,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 9 — No Results State */}
-      <motion.section id="comp-no-results" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.45 }}>
+      <motion.section id="comp-no-results" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-no-results" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.45 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>No Results State</h2>
         <p style={sectionDesc}>
@@ -925,7 +926,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 10 — Permission Denied State */}
-      <motion.section id="comp-permission" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.5 }}>
+      <motion.section id="comp-permission" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-permission" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.5 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Permission Denied</h2>
         <p style={sectionDesc}>
@@ -1015,7 +1016,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 11 — Save / Sync Status */}
-      <motion.section id="comp-save-sync" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.55 }}>
+      <motion.section id="comp-save-sync" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-save-sync" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.55 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Save / Sync Status</h2>
         <p style={sectionDesc}>
@@ -1110,7 +1111,7 @@ export function ComponentsPart9({ system, content }: ComponentsPart9Props) {
       </motion.section>
 
       {/* 12 — Upload / Download Progress */}
-      <motion.section id="comp-upload-progress" data-comp-section style={sectionWrap()} {...fadeUp} transition={{ delay: 0.6 }}>
+      <motion.section id="comp-upload-progress" data-comp-section style={{ ...sectionWrap(), display: activeSection === "comp-upload-progress" ? undefined : "none" }} {...fadeUp} transition={{ delay: 0.6 }}>
         <div style={accentBar} />
         <h2 style={sectionTitle}>Upload / Download Progress</h2>
         <p style={sectionDesc}>
